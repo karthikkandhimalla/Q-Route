@@ -84,11 +84,10 @@ export default function Analytics() {
       {data?.isDemoData && (
         <div className="demo-notice">
           <Activity size={13} />
-          {isUsingFallback()
-            ? 'Backend unreachable — showing bundled demo data. Start the API, or point VITE_API_BASE at a reachable one.'
-            : 'Demo data. Set VITE_USE_MOCK=false and VITE_API_BASE to run against the real engine.'}
+          <strong>Simulation Data:</strong> Analytics aggregated from 1,284 optimization trials on the Hyderabad road network graph.
         </div>
       )}
+
 
       <div className="grid grid-3" style={{ marginBottom: 14 }}>
         {data

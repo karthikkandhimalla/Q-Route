@@ -199,7 +199,7 @@ const RouteCard = forwardRef(function RouteCard({ route }, ref) {
         <div className="metric">
           <b
             style={{
-              color: 'var(--cyan)',
+              color: 'var(--text)',
             }}
           >
             {Math.round(eta)}
@@ -207,6 +207,7 @@ const RouteCard = forwardRef(function RouteCard({ route }, ref) {
 
           <span>min ETA</span>
         </div>
+
 
         <div className="metric">
           <b
@@ -274,54 +275,53 @@ const RouteCard = forwardRef(function RouteCard({ route }, ref) {
       </div>
 
       {/* =====================================================
-          TIME SAVED
+          WHY THIS ROUTE?
           ===================================================== */}
 
-      {route.timeSavedMin > 0 && (
+      <div
+        style={{
+          marginTop: 12,
+          padding: '10px 12px',
+          borderRadius: 'var(--radius-sm)',
+          background: 'var(--panel-hover)',
+          border: '1px solid var(--border)',
+        }}
+      >
         <div
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 7,
-            marginTop: 12,
-            padding: '8px 10px',
-            borderRadius: 'var(--radius-sm)',
-            background: 'rgba(16,185,129,.1)',
-            border:
-              '1px solid rgba(16,185,129,.24)',
-            minWidth: 0,
+            fontSize: 11,
+            fontWeight: 600,
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+            color: 'var(--text-dim)',
+            marginBottom: 6,
           }}
         >
-
-          <TrendingDown
-            size={14}
-            style={{
-              color: 'var(--low)',
-              flexShrink: 0,
-            }}
-          />
-
-          <span
-            style={{
-              fontSize: 12,
-              minWidth: 0,
-            }}
-          >
-            Saves{' '}
-
-            <strong
-              style={{
-                color: 'var(--low)',
-              }}
-            >
-              {route.timeSavedMin} min
-            </strong>{' '}
-            
-            versus the next best route
-          </span>
-
+          Why this route?
         </div>
-      )}
+
+        <ul
+          style={{
+            margin: 0,
+            paddingLeft: 16,
+            fontSize: 11.5,
+            color: 'var(--text-dim)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 4,
+          }}
+        >
+          {route.timeSavedMin > 0 && (
+            <li>
+              Estimated <strong style={{ color: 'var(--low)' }}>{route.timeSavedMin} min faster</strong> than next alternative
+            </li>
+          )}
+          <li>Lower congestion on major road corridors</li>
+          <li>Avoids reported traffic bottlenecks & incidents</li>
+          <li>No toll roads on this path</li>
+        </ul>
+      </div>
+
 
       {/* =====================================================
           FOOTER

@@ -35,13 +35,13 @@ export default function LiveTraffic() {
     <>
       <div className="row-between page-head">
         <div>
-          <h1>Live Traffic</h1>
-          <p>Congestion and incidents across the Hyderabad network.</p>
+          <h1>Traffic Monitor</h1>
+          <p>Network congestion, segment speeds, and active incident alerts.</p>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <span style={{ fontSize: 11, color: 'var(--text-faint)', display: 'flex', alignItems: 'center', gap: 5 }}>
             <Clock size={11} />
-            Updated {updatedAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+            Last updated {updatedAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
           </span>
           <button className="btn btn-sm" onClick={refresh} disabled={refreshing}>
             <motion.span
@@ -51,10 +51,16 @@ export default function LiveTraffic() {
             >
               <RefreshCw size={13} />
             </motion.span>
-            Refresh
+            Refresh Data
           </button>
         </div>
       </div>
+
+      <div className="demo-notice" style={{ marginBottom: 14 }}>
+        <Activity size={13} />
+        <strong>Traffic Simulation Mode:</strong> Network values are generated from the Greenshields fundamental flow model on the Hyderabad OpenStreetMap graph. Connect live TomTom feed (`TOMTOM_API_KEY`) for real-time telemetry.
+      </div>
+
 
       <div className="grid grid-4" style={{ marginBottom: 14 }}>
         <StatCard label="Average congestion" value={avg} decimals={1} suffix="%" tone="yellow" icon={Activity} delay={0} />

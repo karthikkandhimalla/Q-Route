@@ -8,9 +8,7 @@
   flex: 0 0 var(--sidebar-w);
   width: var(--sidebar-w);
   height: 100%;
-  background: rgba(8, 13, 25, 0.82);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: var(--panel);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
@@ -18,7 +16,7 @@
   transition: flex-basis 0.32s var(--ease), width 0.32s var(--ease);
 }
 .sidebar[data-collapsed='true'] { flex-basis: var(--sidebar-w-collapsed); }
-:root[data-theme='light'] .sidebar { background: rgba(255,255,255,.88); }
+:root[data-theme='light'] .sidebar { background: #FFFFFF; }
 .sidebar[data-collapsed='true'] { width: var(--sidebar-w-collapsed); }
 
 .sidebar-head {
@@ -29,15 +27,15 @@
 }
 
 .logo-mark {
-  width: 34px; height: 34px; border-radius: 10px;
+  width: 34px; height: 34px; border-radius: var(--radius-sm);
   display: grid; place-items: center;
   font-weight: 700; font-size: 12px; letter-spacing: .04em;
   color: #fff; flex-shrink: 0;
-  background: linear-gradient(135deg, var(--quantum-dim), var(--cyan));
-  box-shadow: 0 0 18px rgba(124, 58, 237, .45);
+  background: var(--primary-navy);
+  box-shadow: none;
 }
 .logo-text { overflow: hidden; white-space: nowrap; }
-.logo-text strong { display: block; font-size: 14px; letter-spacing: .02em; }
+.logo-text strong { display: block; font-size: 14px; letter-spacing: .02em; color: var(--text); }
 .logo-text span { display: block; font-size: 10px; color: var(--text-faint); }
 
 .sidebar-nav { flex: 1; padding: 12px 9px; overflow-y: auto; overflow-x: hidden; }
@@ -53,18 +51,19 @@
   position: relative;
   transition: background .16s, color .16s;
 }
-.nav-item:hover { background: var(--panel); color: var(--text); }
-.nav-item.active { background: rgba(34,211,238,.12); color: var(--cyan); }
+.nav-item:hover { background: var(--panel-hover); color: var(--text); }
+.nav-item.active { background: #EBF3FA; color: var(--primary-navy); font-weight: 600; }
+:root[data-theme='dark'] .nav-item.active { background: #1E3A5F; color: #F8FAFC; }
 .nav-item.active::before {
   content: ''; position: absolute; left: -9px; top: 50%;
   transform: translateY(-50%);
   width: 3px; height: 18px; border-radius: 0 3px 3px 0;
-  background: var(--cyan); box-shadow: 0 0 10px var(--cyan);
+  background: var(--primary-navy); box-shadow: none;
 }
 .nav-item svg { flex-shrink: 0; }
 .nav-count {
   margin-left: auto;
-  background: rgba(239,68,68,.2); color: var(--severe);
+  background: rgba(198, 61, 79, 0.12); color: var(--severe);
   border-radius: 999px; padding: 1px 6px; font-size: 10px; font-weight: 700;
 }
 
@@ -80,7 +79,7 @@
   display: grid; place-items: center; color: var(--text-dim);
   z-index: 2;
 }
-.collapse-btn:hover { color: var(--cyan); border-color: var(--cyan); }
+.collapse-btn:hover { color: var(--primary-navy); border-color: var(--primary-navy); }
 
 /* -------------------------------------------------------------- navbar */
 .navbar {
@@ -90,25 +89,23 @@
   gap: 14px;
   padding: 0 22px;
   border-bottom: 1px solid var(--border);
-  background: rgba(8, 13, 25, 0.6);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  background: var(--panel);
 }
-:root[data-theme='light'] .navbar { background: rgba(255,255,255,.72); }
+:root[data-theme='light'] .navbar { background: #FFFFFF; }
 .navbar h2 { font-size: 15px; }
 .navbar-right { display: flex; align-items: center; gap: 9px; }
 
 .live-chip {
   display: flex; align-items: center; gap: 6px;
   padding: 5px 11px; border-radius: 999px;
-  background: rgba(16,185,129,.12);
-  border: 1px solid rgba(16,185,129,.3);
+  background: rgba(22, 128, 92, 0.1);
+  border: 1px solid rgba(22, 128, 92, 0.25);
   color: var(--low);
   font-size: 10px; font-weight: 700; letter-spacing: .09em;
 }
 
 .icon-btn {
-  width: 34px; height: 34px; border-radius: 10px;
+  width: 34px; height: 34px; border-radius: var(--radius-sm);
   display: grid; place-items: center;
   border: 1px solid var(--border); background: var(--panel);
   color: var(--text-dim); position: relative;
@@ -122,11 +119,12 @@
 }
 
 .avatar {
-  width: 34px; height: 34px; border-radius: 10px;
+  width: 34px; height: 34px; border-radius: var(--radius-sm);
   display: grid; place-items: center;
-  background: linear-gradient(135deg, var(--blue), var(--quantum));
+  background: var(--primary-navy);
   color: #fff; font-size: 12px; font-weight: 700;
 }
+
 
 .notif-panel {
   position: absolute; top: calc(var(--navbar-h) - 8px); right: 22px;

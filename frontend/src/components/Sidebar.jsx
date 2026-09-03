@@ -11,7 +11,7 @@ import { SYSTEM_STATUS } from '../data/mockData'
 
 export const NAV_ITEMS = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
-  { to: '/optimizer', label: 'Route Optimizer', icon: RouteIcon },
+  { to: '/optimizer', label: 'Plan Route', icon: RouteIcon },
   { to: '/traffic', label: 'Live Traffic', icon: Activity },
   { to: '/analytics', label: 'Analytics', icon: BarChart3 },
   { to: '/benchmark', label: 'Benchmark', icon: FlaskConical },
@@ -87,7 +87,7 @@ export default function Sidebar() {
                 transition={{ duration: 0.2 }}
               >
                 <strong>Q Route</strong>
-                <span>Optimizer</span>
+                <span>Urban Mobility</span>
               </motion.div>
             )}
           </AnimatePresence>

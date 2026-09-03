@@ -57,10 +57,10 @@ export default function RouteSelector({ onOptimize, busy }) {
       {/* START LOCATION */}
       <PlaceInput
         id="start"
-        label="Start location"
+        label="FROM"
         value={start}
         onChange={setStart}
-        placeholder="Type any place in Hyderabad…"
+        placeholder="Type start location in Hyderabad…"
         icon={<MapPin size={14} />}
       />
 
@@ -79,16 +79,16 @@ export default function RouteSelector({ onOptimize, busy }) {
       {/* DESTINATION */}
       <PlaceInput
         id="end"
-        label="Destination"
+        label="TO"
         value={end}
         onChange={setEnd}
-        placeholder="Type any place in Hyderabad…"
+        placeholder="Type destination in Hyderabad…"
         icon={<Flag size={14} />}
       />
 
       {/* ALGORITHM */}
       <div className="field route-field">
-        <label htmlFor="algo">Algorithm</label>
+        <label htmlFor="algo">Optimization Algorithm</label>
 
         <select
           id="algo"
@@ -106,14 +106,14 @@ export default function RouteSelector({ onOptimize, busy }) {
         {activeAlgo?.quantum && (
           <div className="badge badge-quantum quantum-badge">
             <Zap size={9} />
-            Quantum-inspired
+            QPSO Metaheuristic
           </div>
         )}
       </div>
 
       {/* OPTIMIZATION OBJECTIVE */}
       <div className="field route-field">
-        <label>Optimization objective</label>
+        <label>Travel Preference</label>
 
         <div className="segmented route-segmented">
           {OPTIMIZATION_MODES.map((m) => (
@@ -138,7 +138,7 @@ export default function RouteSelector({ onOptimize, busy }) {
         <Navigation size={15} />
 
         <span>
-          {busy ? 'Optimizing…' : 'Optimize Route'}
+          {busy ? 'Finding Optimal Route…' : 'Find Optimal Route'}
         </span>
       </button>
 

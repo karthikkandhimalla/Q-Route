@@ -6,85 +6,86 @@
 
 :root {
   /* --------------------------------------------------------------------
-     Q ROUTE palette.
-
-     Variable NAMES are kept (--cyan, --blue, --quantum, --low ...) so nothing
-     downstream breaks; only their values change. The scheme moves from the old
-     navy-and-cyan to a deeper indigo base with a teal primary and a fuchsia
-     accent reserved for quantum/QPSO elements.
-
-     The four traffic colours stay semantically ordered green -> amber ->
-     orange -> rose, because that ramp IS the map legend and users read it as a
-     scale rather than as decoration.
+     Q ROUTE Palette - Professional Urban Mobility System
+     DEFAULT: Light Mode (#F5F7FA canvas, #FFFFFF cards, #163A5F navy primary)
      -------------------------------------------------------------------- */
 
-  /* surfaces — indigo-black, warm enough that glows read cleanly */
-  --bg: #070812;
-  --bg-2: #0d0f20;
-  --panel: rgba(255, 255, 255, 0.036);
-  --panel-solid: #131630;
-  --panel-hover: rgba(255, 255, 255, 0.065);
-  --border: rgba(255, 255, 255, 0.085);
-  --border-strong: rgba(255, 255, 255, 0.16);
-
-  /* text */
-  --text: #eaeaf7;
-  --text-dim: #9a9ac0;
-  --text-faint: #6b6b94;
-
-  /* accents */
-  --cyan: #2dd4bf;          /* teal — primary accent */
-  --blue: #6366f1;          /* indigo — gradients and depth */
-  --quantum: #e879f9;       /* fuchsia — QPSO elements only */
-  --quantum-dim: #a855f7;
-
-  /* traffic scale */
-  --low: #34d399;
-  --moderate: #fbbf24;
-  --heavy: #fb923c;
-  --severe: #f43f5e;
-
-  --radius: 14px;
-  --radius-sm: 10px;
-  --radius-lg: 20px;
-  --sidebar-w: 244px;
-  --sidebar-w-collapsed: 72px;
-  --navbar-h: 62px;
-
-  --shadow: 0 10px 34px rgba(0, 0, 0, 0.5);
-  --glow-cyan: 0 0 24px rgba(45, 212, 191, 0.3);
-  --glow-quantum: 0 0 26px rgba(232, 121, 249, 0.32);
-
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  /* Slightly springier curve for the sidebar, which is the one element the
-     user watches move. */
-  --ease-fold: cubic-bezier(0.32, 0.72, 0, 1);
-}
-
-/* light mode is a deliberate secondary; the product is dark-first */
-:root[data-theme='light'] {
-  /* clean warm-white base */
-  --bg: #f5f7fa;
-  --bg-2: #ffffff;
-
-  /* cards */
-  --panel: rgba(255, 255, 255, 0.78);
-  --panel-solid: #ffffff;
-  --panel-hover: #f8fafc;
-
-  /* borders */
-  --border: #e2e8f0;
-  --border-strong: #cbd5e1;
+  /* surfaces */
+  --bg: #F5F7FA;
+  --bg-2: #FFFFFF;
+  --panel: #FFFFFF;
+  --panel-solid: #FFFFFF;
+  --panel-hover: #F0F4F8;
+  --border: #D9E0E8;
+  --border-strong: #B8C4D0;
 
   /* text */
   --text: #172033;
-  --text-dim: #526174;
-  --text-faint: #7c8a9d;
+  --text-dim: #667085;
+  --text-faint: #98A2B3;
 
-  /* softer shadow */
-  --shadow:
-    0 8px 28px rgba(15, 23, 42, 0.08);
+  /* primary & secondary brand accents */
+  --primary-navy: #163A5F;
+  --secondary-teal: #0F766E;
+  --cyan: #163A5F;          /* primary navy for main actions */
+  --blue: #163A5F;          /* primary navy */
+  --quantum: #0F766E;       /* secondary teal for algorithm accents */
+  --quantum-dim: #0F766E;
+
+  /* semantic traffic & status ramp */
+  --low: #16805C;           /* success green (low congestion) */
+  --moderate: #C47A00;      /* warning amber (moderate congestion) */
+  --heavy: #D96B00;         /* orange (heavy congestion) */
+  --severe: #C63D4F;        /* danger red (severe congestion / incident) */
+  --info: #2563A6;          /* info blue */
+
+  --radius: 8px;
+  --radius-sm: 6px;
+  --radius-lg: 12px;
+  --sidebar-w: 240px;
+  --sidebar-w-collapsed: 68px;
+  --navbar-h: 60px;
+
+  --shadow: 0 1px 3px 0 rgba(16, 24, 40, 0.08), 0 1px 2px 0 rgba(16, 24, 40, 0.04);
+  --glow-cyan: none;
+  --glow-quantum: none;
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-fold: cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* Optional Neutral Dark Theme */
+:root[data-theme='dark'] {
+  --bg: #0F172A;
+  --bg-2: #1E293B;
+
+  --panel: #1E293B;
+  --panel-solid: #1E293B;
+  --panel-hover: #334155;
+
+  --border: #334155;
+  --border-strong: #475569;
+
+  --text: #F8FAFC;
+  --text-dim: #94A3B8;
+  --text-faint: #64748B;
+
+  --primary-navy: #38BDF8;
+  --secondary-teal: #2DD4BF;
+  --cyan: #38BDF8;
+  --blue: #38BDF8;
+  --quantum: #2DD4BF;
+  --quantum-dim: #2DD4BF;
+
+  --low: #22C55E;
+  --moderate: #F59E0B;
+  --heavy: #F97316;
+  --severe: #EF4444;
+  --info: #60A5FA;
+
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
 
 * { box-sizing: border-box; }
 
@@ -101,18 +102,6 @@ body {
   overflow: hidden;
 }
 
-/* ambient depth behind everything */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(900px 520px at 10% -10%, rgba(99, 102, 241, 0.17), transparent 64%),
-    radial-gradient(780px 470px at 92% 2%, rgba(232, 121, 249, 0.12), transparent 62%),
-    radial-gradient(700px 420px at 50% 110%, rgba(45, 212, 191, 0.09), transparent 60%);
-  z-index: 0;
-}
 
 h1, h2, h3, h4 { margin: 0; font-weight: 600; letter-spacing: -0.015em; }
 p { margin: 0; }
@@ -217,25 +206,27 @@ input, select { font-family: inherit; }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--blue), var(--cyan));
-  border-color: transparent;
-  color: #06101a;
-  box-shadow: var(--glow-cyan);
+  background: var(--primary-navy);
+  border-color: var(--primary-navy);
+  color: #ffffff;
+  box-shadow: none;
 }
 .btn-primary:hover:not(:disabled) {
-  filter: brightness(1.08);
-  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  background: #0F2C4A;
+  border-color: #0F2C4A;
+  color: #ffffff;
 }
 
 .btn-quantum {
-  background: linear-gradient(135deg, var(--quantum-dim), var(--quantum));
-  border-color: transparent;
-  color: #fff;
-  box-shadow: var(--glow-quantum);
+  background: var(--secondary-teal);
+  border-color: var(--secondary-teal);
+  color: #ffffff;
+  box-shadow: none;
 }
 .btn-quantum:hover:not(:disabled) {
-  filter: brightness(1.1);
-  background: linear-gradient(135deg, var(--quantum-dim), var(--quantum));
+  background: #0D655E;
+  border-color: #0D655E;
+  color: #ffffff;
 }
 
 .btn-block { width: 100%; }
@@ -254,9 +245,9 @@ input, select { font-family: inherit; }
 
 .input, .select {
   width: 100%;
-  padding: 10px 12px;
+  padding: 9px 12px;
   border-radius: var(--radius-sm);
-  background: rgba(0, 0, 0, 0.28);
+  background: var(--bg-2);
   border: 1px solid var(--border);
   color: var(--text);
   font-size: 13px;
@@ -264,20 +255,20 @@ input, select { font-family: inherit; }
   transition: border-color 0.16s, box-shadow 0.16s;
 }
 :root[data-theme='light'] .input,
-:root[data-theme='light'] .select { background: rgba(255,255,255,.8); }
+:root[data-theme='light'] .select { background: #FFFFFF; }
 .input:focus, .select:focus {
-  border-color: var(--cyan);
-  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.13);
+  border-color: var(--primary-navy);
+  box-shadow: 0 0 0 3px rgba(22, 58, 95, 0.1);
 }
 .select option { background: var(--panel-solid); color: var(--text); }
 
-/* segmented control — used for optimisation mode */
+/* segmented control — used for travel preference */
 .segmented { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
 .segmented button {
-  padding: 9px 8px;
+  padding: 8px 8px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  background: rgba(0,0,0,.22);
+  background: var(--bg-2);
   color: var(--text-dim);
   font-size: 12px;
   font-weight: 500;
@@ -285,9 +276,15 @@ input, select { font-family: inherit; }
 }
 .segmented button:hover { color: var(--text); border-color: var(--border-strong); }
 .segmented button[data-active='true'] {
-  background: rgba(34,211,238,.13);
-  border-color: rgba(34,211,238,.42);
-  color: var(--cyan);
+  background: #EBF3FA;
+  border-color: var(--primary-navy);
+  color: var(--primary-navy);
+  font-weight: 600;
+}
+:root[data-theme='dark'] .segmented button[data-active='true'] {
+  background: #1E3A5F;
+  border-color: #38BDF8;
+  color: #F8FAFC;
 }
 
 /* toggle */
@@ -295,12 +292,12 @@ input, select { font-family: inherit; }
   position: relative;
   width: 40px; height: 22px;
   border-radius: 999px;
-  background: rgba(255,255,255,.11);
+  background: #D9E0E8;
   border: 1px solid var(--border);
   transition: background 0.2s;
   flex-shrink: 0;
 }
-.toggle[data-on='true'] { background: linear-gradient(135deg, var(--blue), var(--cyan)); }
+.toggle[data-on='true'] { background: var(--primary-navy); }
 .toggle span {
   position: absolute; top: 2px; left: 2px;
   width: 16px; height: 16px; border-radius: 50%;
@@ -308,6 +305,7 @@ input, select { font-family: inherit; }
   transition: transform 0.22s var(--ease);
 }
 .toggle[data-on='true'] span { transform: translateX(18px); }
+
 
 .row-between { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 

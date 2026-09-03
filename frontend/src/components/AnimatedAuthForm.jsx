@@ -235,108 +235,18 @@ export default function AnimatedAuthForm({
   onSubmit,
   busy,
 }) {
-
-  const [turned, setTurned] = useState(false)
-
-  const [bubble, setBubble] = useState(
-    mode === 'signin'
-      ? MESSAGES.email2
-      : MESSAGES.idle
-  )
-
-  useEffect(() => {
-    setTurned(false)
-
-    setBubble(
-      mode === 'signin'
-        ? MESSAGES.email2
-        : MESSAGES.idle
-    )
-  }, [mode])
-
-  const handlePasswordFocus = () => {
-    setTurned(true)
-
-    setBubble(
-      mode === 'signin'
-        ? MESSAGES.password2
-        : MESSAGES.password
-    )
-  }
-
-  const handleEmailFocus = () => {
-    setTurned(false)
-
-    setBubble(
-      mode === 'signin'
-        ? MESSAGES.email2
-        : MESSAGES.email
-    )
-  }
-
-  const handleNameFocus = () => {
-    setTurned(false)
-    setBubble(MESSAGES.name)
-  }
-
   return (
     <div className="qro-auth-animation">
-
-      {/* ===============================================
-          HEADLINE
-      =============================================== */}
-
-      <div className="qro-animation-headline">
-
-        <h1>
-          <span className="qro-headline-second">
-            Q Route
-            <span className="qro-type-cursor" />
-          </span>
+      {/* Professional Headline */}
+      <div className="qro-animation-headline" style={{ textAlign: 'center', marginBottom: 20 }}>
+        <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0, color: 'var(--text)' }}>
+          Q Route
         </h1>
-
+        <p style={{ fontSize: 13, color: 'var(--text-dim)', marginTop: 4 }}>
+          Intelligent route optimization for urban mobility.
+        </p>
       </div>
 
-
-      {/* ===============================================
-          SPEECH BUBBLE
-      =============================================== */}
-
-      <AnimatePresence mode="wait">
-
-        <motion.div
-          key={bubble}
-          className="qro-speech-bubble"
-          initial={{
-            opacity: 0,
-            y: 8,
-            scale: 0.95,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-            scale: 1,
-          }}
-          exit={{
-            opacity: 0,
-            y: -5,
-            scale: 0.96,
-          }}
-          transition={{
-            duration: 0.22,
-          }}
-        >
-          {bubble}
-        </motion.div>
-
-      </AnimatePresence>
-
-
-      {/* ===============================================
-          ROBOT
-      =============================================== */}
-
-      <Robot turned={turned} />
 
 
       {/* ===============================================

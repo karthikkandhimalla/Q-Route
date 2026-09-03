@@ -102,19 +102,17 @@ export default function Navbar() {
         <BrandMark />
         <div className="navbar-brand-text">
           <strong>Q&nbsp;Route</strong>
-          <span>Quantum Route Optimizer</span>
+          <span>Intelligent Urban Route Optimization</span>
         </div>
         <span className="navbar-divider" aria-hidden="true" />
         <h2 className="navbar-page-title">{current?.label || 'Dashboard'}</h2>
       </div>
 
       <div className="navbar-right" ref={ref}>
-        {/* The labels are wrapped so a narrow screen can drop the words and
-            keep the coloured dots. As bare text nodes they could not be
-            targeted, which is why the navbar overflowed on a phone. */}
+        {/* Transparent system status chip */}
         <div className="live-chip">
           <span className="dot pulse" style={{ background: 'currentColor' }} />
-          <span className="chip-text">LIVE</span>
+          <span className="chip-text">SYSTEM ACTIVE</span>
         </div>
 
         <div

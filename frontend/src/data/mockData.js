@@ -70,7 +70,7 @@ export const ROUTES = [
     score: 91,
     timeSavedMin: 6,
     via: 'Jubilee Hills → Banjara Hills → Mehdipatnam',
-    color: '#34d399',
+    color: '#16805C',
     path: [
       [17.4435, 78.3772], [17.44, 78.39], [17.431, 78.402], [17.4239, 78.4138],
       [17.418, 78.429], [17.4126, 78.4482], [17.405, 78.445], [17.395, 78.436],
@@ -90,7 +90,7 @@ export const ROUTES = [
     score: 78,
     timeSavedMin: 0,
     via: 'Madhapur → Panjagutta → Khairatabad → Abids',
-    color: '#fbbf24',
+    color: '#C47A00',
     path: [
       [17.4435, 78.3772], [17.4483, 78.3915], [17.44, 78.405], [17.43, 78.43],
       [17.4256, 78.45], [17.418, 78.456], [17.409, 78.465], [17.399, 78.47],
@@ -109,7 +109,7 @@ export const ROUTES = [
     score: 71,
     timeSavedMin: 0,
     via: 'Manikonda → Tolichowki → Attapur',
-    color: '#fb923c',
+    color: '#D96B00',
     path: [
       [17.4435, 78.3772], [17.43, 78.38], [17.415, 78.385], [17.403, 78.376],
       [17.396, 78.405], [17.39, 78.42], [17.361, 78.423], [17.355, 78.44],
@@ -131,7 +131,7 @@ export const REROUTED_ROUTE = {
   score: 94,
   timeSavedMin: 7,
   via: 'Madhapur → Panjagutta → Masab Tank → Nampally',
-  color: '#2dd4bf',
+  color: '#0F766E',
   path: [
     [17.4435, 78.3772], [17.4483, 78.3915], [17.442, 78.408], [17.4374, 78.4487],
     [17.4256, 78.45], [17.415, 78.452], [17.4026, 78.4535], [17.3935, 78.4485],
@@ -169,11 +169,12 @@ export const TRAFFIC_SEGMENTS = [
 ]
 
 export const TRAFFIC_COLORS = {
-  low: '#34d399',
-  moderate: '#fbbf24',
-  heavy: '#fb923c',
-  severe: '#f43f5e',
+  low: '#16805C',
+  moderate: '#C47A00',
+  heavy: '#D96B00',
+  severe: '#C63D4F',
 }
+
 
 export const TRAFFIC_LABELS = {
   low: 'Low',

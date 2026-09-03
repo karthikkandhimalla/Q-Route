@@ -26,8 +26,9 @@ const pin = (label, color) =>
         class="marker-pin"
         style="
           background:${color};
-          box-shadow:0 0 14px ${color};
+          box-shadow:0 1px 3px rgba(0,0,0,0.2);
         "
+
       >
         ${label}
       </div>

@@ -41,9 +41,10 @@ export default function RouteOptimizer() {
   return (
     <>
       <div className="page-head">
-        <h1>Route Optimizer</h1>
-        <p>Configure the objective function and run the optimization engine.</p>
+        <h1>Plan Route</h1>
+        <p>Configure optimization objectives and compute traffic-aware route alternatives.</p>
       </div>
+
 
       <div className="dash-grid">
         <div className="dash-col">

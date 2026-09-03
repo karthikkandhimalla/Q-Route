@@ -44,7 +44,7 @@ export function AppProvider({ children }) {
    * anywhere real, replace signIn/signUp with calls to a backend that hashes
    * passwords server-side and returns a signed token.
    */
-  const [user, setUser] = useState(() => read('qro.user', null))
+  const [user, setUser] = useState(() => read('qro.user', { name: 'Guest Explorer', email: 'guest@qroute.ai', isGuest: true }))
 
   useEffect(() => {
     if (user) write('qro.user', user)
@@ -81,7 +81,7 @@ export function AppProvider({ children }) {
   const signOut = useCallback(() => setUser(null), [])
 
   /* --- preferences ------------------------------------------------------ */
-  const [theme, setTheme] = useState(() => read('qro.theme', 'dark'))
+  const [theme, setTheme] = useState(() => read('qro.theme', 'light'))
   const [collapsed, setCollapsed] = useState(() => read('qro.sidebar', false))
   const [settings, setSettings] = useState(() =>
     read('qro.settings', {
