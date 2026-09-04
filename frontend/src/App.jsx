@@ -5,6 +5,7 @@ import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar'
 import LoadingScreen from './components/LoadingScreen'
 import { useApp } from './store/AppContext'
+import Login from './pages/Login'
 
 const Dashboard = lazy(() => import('./pages/Dashboard'))
 const RouteOptimizer = lazy(() => import('./pages/RouteOptimizer'))
@@ -14,7 +15,6 @@ const Benchmark = lazy(() => import('./pages/Benchmark'))
 const Alerts = lazy(() => import('./pages/Alerts'))
 const History = lazy(() => import('./pages/History'))
 const Settings = lazy(() => import('./pages/Settings'))
-const Login = lazy(() => import('./pages/Login'))
 
 const pageMotion = {
   initial: { opacity: 0, y: 12 },
@@ -27,13 +27,9 @@ export default function App() {
   const location = useLocation()
   const { user } = useApp()
 
-  // Unauthenticated users only ever see the sign-in screen.
+  // Unauthenticated users only ever see the sign-in screen first.
   if (!user) {
-    return (
-      <Suspense fallback={<LoadingScreen label="Loading…" />}>
-        <Login />
-      </Suspense>
-    )
+    return <Login />
   }
 
   return (

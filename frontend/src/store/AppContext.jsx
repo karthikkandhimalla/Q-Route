@@ -38,47 +38,70 @@ export function AppProvider({ children }) {
   /* --- auth ------------------------------------------------------------
    * DEMO AUTHENTICATION ONLY.
    *
-   * There is no auth backend, so nothing here validates a credential. Any
-   * well-formed input is accepted, the password is never stored, and the
-   * "session" is just a name/email in localStorage. Before this is deployed
-   * anywhere real, replace signIn/signUp with calls to a backend that hashes
-   * passwords server-side and returns a signed token.
+   * By default, user starts as null so that every visitor sees the Login page first.
+   * Active sessions persist in sessionStorage so refreshing within the same tab works.
    */
-  const [user, setUser] = useState(() => read('qro.user', { name: 'Guest Explorer', email: 'guest@qroute.ai', isGuest: true }))
+  const [user, setUser] = useState(() => {
+    try {
+      // Clear legacy auto-login user from localStorage if present
+      localStorage.removeItem('qro.user')
+      const sess = sessionStorage.getItem('qro.session_user')
+      return sess ? JSON.parse(sess) : null
+    } catch {
+      return null
+    }
+  })
 
   useEffect(() => {
-    if (user) write('qro.user', user)
-    else {
-      try {
-        localStorage.removeItem('qro.user')
-      } catch { /* storage blocked — session just won't persist */ }
+    try {
+      if (user) {
+        sessionStorage.setItem('qro.session_user', JSON.stringify(user))
+      } else {
+        sessionStorage.removeItem('qro.session_user')
+      }
+    } catch {
+      /* storage blocked — session just won't persist */
     }
   }, [user])
 
   const signIn = useCallback(async ({ email, name }) => {
     await new Promise((r) => setTimeout(r, 650))     // make the loading state real
     const handle = (email || '').split('@')[0] || 'user'
-    setUser({
+    const newUser = {
       email: email || 'guest@qro.local',
       name: name || handle.replace(/[._-]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
       initials: (name || handle).slice(0, 2).toUpperCase(),
       signedInAt: new Date().toISOString(),
       guest: false,
-    })
+    }
+    setUser(newUser)
+    try {
+      sessionStorage.setItem('qro.session_user', JSON.stringify(newUser))
+    } catch {}
     return true
   }, [])
 
   const continueAsGuest = useCallback(() => {
-    setUser({
+    const guestUser = {
       email: 'guest@qro.local',
       name: 'Guest',
       initials: 'GU',
       signedInAt: new Date().toISOString(),
       guest: true,
-    })
+    }
+    setUser(guestUser)
+    try {
+      sessionStorage.setItem('qro.session_user', JSON.stringify(guestUser))
+    } catch {}
   }, [])
 
-  const signOut = useCallback(() => setUser(null), [])
+  const signOut = useCallback(() => {
+    try {
+      sessionStorage.removeItem('qro.session_user')
+      localStorage.removeItem('qro.user')
+    } catch {}
+    setUser(null)
+  }, [])
 
   /* --- preferences ------------------------------------------------------ */
   const [theme, setTheme] = useState(() => read('qro.theme', 'light'))
