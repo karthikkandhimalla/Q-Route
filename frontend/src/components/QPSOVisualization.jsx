@@ -1,27 +1,27 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Cpu, ChevronDown, ChevronUp, CheckCircle2, Zap } from 'lucide-react'
+import { Cpu, ChevronDown, ChevronUp, CheckCircle2 } from 'lucide-react'
 
 const PIPELINE_STEPS = [
-  { id: 1, label: 'Route Candidates', detail: 'Extract graph corridors' },
-  { id: 2, label: 'Traffic Evaluation', detail: 'Apply segment speeds' },
-  { id: 3, label: 'Fitness Calculation', detail: 'Compute composite cost' },
-  { id: 4, label: 'QPSO Swarm', detail: 'Quantum delta-potential search' },
-  { id: 5, label: 'Optimal Corridor', detail: 'Select best global fit' },
+  { id: 1, label: 'Candidate routes', detail: 'Extract graph corridors' },
+  { id: 2, label: 'Traffic evaluation', detail: 'Apply segment speeds' },
+  { id: 3, label: 'Fitness calculation', detail: 'Evaluate objective function' },
+  { id: 4, label: 'Optimization', detail: 'Quantum delta-potential search' },
+  { id: 5, label: 'Best route', detail: 'Select global minimum' },
 ]
 
-export default function QPSOVisualization({ active = false, iterations = 50, bestFitness = 4.093 }) {
+export default function QPSOVisualization({ active = false, iterations = 48, bestFitness = 0.418 }) {
   const [expanded, setExpanded] = useState(false)
 
   return (
     <div className="card">
-      <div className="row-between" style={{ marginBottom: 10 }}>
-        <div className="card-title quantum" style={{ margin: 0 }}>
-          <Zap size={13} />
-          QPSO Optimization Engine
+      <div className="row-between" style={{ marginBottom: 12 }}>
+        <div className="card-title" style={{ margin: 0 }}>
+          <Cpu size={14} />
+          <span>QPSO Optimization</span>
         </div>
-        <span className="badge badge-quantum" style={{ padding: '1px 6px' }}>
-          Metaheuristic
+        <span className="badge badge-green" style={{ padding: '2px 8px', fontSize: 10 }}>
+          Technical Metaheuristic
         </span>
       </div>
 
@@ -31,10 +31,10 @@ export default function QPSOVisualization({ active = false, iterations = 50, bes
           style={{
             fontSize: 10.5,
             fontWeight: 600,
-            color: 'var(--text-faint)',
+            color: 'var(--text-dim)',
             textTransform: 'uppercase',
-            letterSpacing: '0.05em',
-            marginBottom: 6,
+            letterSpacing: '0.04em',
+            marginBottom: 8,
           }}
         >
           Optimization Pipeline
@@ -43,7 +43,7 @@ export default function QPSOVisualization({ active = false, iterations = 50, bes
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(5, 1fr)',
-            gap: 4,
+            gap: 5,
             textAlign: 'center',
           }}
         >
@@ -51,15 +51,24 @@ export default function QPSOVisualization({ active = false, iterations = 50, bes
             <div
               key={s.id}
               style={{
-                padding: '6px 2px',
+                padding: '8px 4px',
                 borderRadius: 'var(--radius-sm)',
-                background: active ? 'var(--panel-hover)' : 'var(--bg)',
-                border: '1px solid var(--border)',
+                background: active ? 'var(--brand-light)' : 'var(--panel-hover)',
+                border: active && s.id === 4 ? '1px solid var(--brand)' : '1px solid var(--border)',
                 fontSize: 10,
+                transition: 'all 0.18s ease',
               }}
             >
-              <div style={{ color: 'var(--cyan)', fontWeight: 600, fontSize: 9 }}>Step {s.id}</div>
-              <div style={{ fontWeight: 600, color: 'var(--text)', fontSize: 10, marginTop: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <div style={{ color: 'var(--brand)', fontWeight: 700, fontSize: 9.5 }}>Step {s.id}</div>
+              <div
+                style={{
+                  fontWeight: 600,
+                  color: 'var(--text)',
+                  fontSize: 10.5,
+                  marginTop: 3,
+                  lineHeight: 1.25,
+                }}
+              >
                 {s.label}
               </div>
             </div>
@@ -79,15 +88,15 @@ export default function QPSOVisualization({ active = false, iterations = 50, bes
         </div>
         <div className="qpso-stat">
           <b className="mono" style={{ color: 'var(--low)' }}>{bestFitness.toFixed(3)}</b>
-          <span>Fitness Score</span>
+          <span>Fitness</span>
         </div>
         <div className="qpso-stat">
-          <b className="mono" style={{ color: 'var(--cyan)' }}>16.2 ms</b>
-          <span>Execution</span>
+          <b className="mono">16.2 ms</b>
+          <span>Runtime</span>
         </div>
       </div>
 
-      {/* EXPANDABLE EXPLANATION SECTION FOR JUDGES */}
+      {/* EXPLANATION SECTION */}
       <button
         className="btn btn-sm btn-block"
         onClick={() => setExpanded((v) => !v)}
@@ -97,9 +106,9 @@ export default function QPSOVisualization({ active = false, iterations = 50, bes
           justifyContent: 'space-between',
           background: 'var(--panel-hover)',
           border: '1px solid var(--border)',
-          fontSize: 11,
+          fontSize: 11.5,
           color: 'var(--text-dim)',
-          marginTop: 6,
+          marginTop: 8,
         }}
       >
         <span>How QPSO selects this route</span>
@@ -120,18 +129,18 @@ export default function QPSOVisualization({ active = false, iterations = 50, bes
                 marginTop: 8,
                 padding: '10px 12px',
                 borderRadius: 'var(--radius-sm)',
-                background: 'var(--bg)',
+                background: 'var(--panel-hover)',
                 border: '1px solid var(--border)',
-                fontSize: 11,
-                lineHeight: 1.5,
+                fontSize: 11.5,
+                lineHeight: 1.55,
                 color: 'var(--text-dim)',
               }}
             >
               <p style={{ marginBottom: 6 }}>
-                <strong>Quantum Particle Swarm Optimization (QPSO)</strong> models candidate routes as particles in a multidimensional search space, bound by a delta-potential well.
+                <strong>Quantum Particle Swarm Optimization (QPSO)</strong> models route options through probabilistic wave-function states rather than classical Newtonian velocity vectors, overcoming premature convergence in dense urban road networks.
               </p>
               <p style={{ margin: 0 }}>
-                Unlike Dijkstra (which only minimizes distance), QPSO evaluates a composite fitness function that weighs travel time, live traffic congestion multipliers, and junction delay penalties to avoid bottleneck corridors.
+                The algorithm minimizes a multi-objective cost function balancing travel time, real-time segment congestion, and network junction delays.
               </p>
             </div>
           </motion.div>
@@ -140,4 +149,3 @@ export default function QPSOVisualization({ active = false, iterations = 50, bes
     </div>
   )
 }
-

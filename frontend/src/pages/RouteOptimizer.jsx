@@ -68,7 +68,7 @@ export default function RouteOptimizer() {
                   <div className="score-bar">
                     <motion.div
                       className="score-fill"
-                      style={{ background: 'linear-gradient(90deg,var(--blue),var(--cyan))' }}
+                      style={{ background: 'var(--brand)' }}
                       initial={{ width: 0 }}
                       animate={{ width: `${v * 100}%` }}
                       transition={{ duration: 0.5 }}

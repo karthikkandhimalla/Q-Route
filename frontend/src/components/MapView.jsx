@@ -1002,7 +1002,7 @@ export default function MapView({
         )}
 
       {/* ======================================================
-          START
+          START (Origin: Blue Marker)
           ====================================================== */}
 
       {startPoint && (
@@ -1012,7 +1012,7 @@ export default function MapView({
           }
           icon={pin(
             'A',
-            '#22d3ee'
+            '#2F6FED'
           )}
         >
           <Popup>
@@ -1025,7 +1025,7 @@ export default function MapView({
       )}
 
       {/* ======================================================
-          DESTINATION
+          DESTINATION (Destination: Forest Green Marker)
           ====================================================== */}
 
       {endPoint && (
@@ -1035,7 +1035,7 @@ export default function MapView({
           }
           icon={pin(
             'B',
-            '#a855f7'
+            '#1F4D3A'
           )}
         >
           <Popup>
@@ -1097,7 +1097,7 @@ export default function MapView({
             highlightCoords
           }
           icon={incidentIcon(
-            '#ef4444'
+            '#D64545'
           )}
         >
           <Popup>

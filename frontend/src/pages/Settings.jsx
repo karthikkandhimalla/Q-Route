@@ -43,7 +43,7 @@ export default function Settings() {
             </div>
             <Toggle
               label="Dark mode"
-              hint="The interface is designed dark-first."
+              hint="Toggle between warm light and dark theme."
               on={theme === 'dark'}
               onChange={(v) => setTheme(v ? 'dark' : 'light')}
             />
@@ -102,7 +102,7 @@ export default function Settings() {
             <div className="field">
               <div className="row-between" style={{ marginBottom: 7 }}>
                 <label style={{ margin: 0 }}>Congestion sensitivity</label>
-                <span className="mono" style={{ fontSize: 12, color: 'var(--cyan)' }}>
+                <span className="mono" style={{ fontSize: 12, color: 'var(--brand)', fontWeight: 600 }}>
                   {settings.congestionSensitivity}%
                 </span>
               </div>
@@ -121,7 +121,7 @@ export default function Settings() {
             <div className="field" style={{ marginBottom: 0 }}>
               <div className="row-between" style={{ marginBottom: 7 }}>
                 <label style={{ margin: 0 }}>Alert threshold</label>
-                <span className="mono" style={{ fontSize: 12, color: 'var(--cyan)' }}>
+                <span className="mono" style={{ fontSize: 12, color: 'var(--brand)', fontWeight: 600 }}>
                   {settings.alertThresholdMin} min
                 </span>
               </div>

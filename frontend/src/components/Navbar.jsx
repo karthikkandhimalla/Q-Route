@@ -26,46 +26,26 @@ function cityStatus(segments) {
  */
 function BrandMark() {
   return (
-    <span className="brand-mark" aria-hidden="true">
-      <svg viewBox="0 0 40 40" width="34" height="34">
-        <defs>
-          <linearGradient id="qrGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="var(--blue)" />
-            <stop offset="55%" stopColor="var(--cyan)" />
-            <stop offset="100%" stopColor="var(--quantum)" />
-          </linearGradient>
-        </defs>
-
-        {/* two crossed orbits */}
-        <ellipse cx="20" cy="20" rx="15" ry="7" fill="none"
-                 stroke="url(#qrGrad)" strokeWidth="1.6" opacity="0.75"
-                 transform="rotate(-28 20 20)" />
-        <ellipse cx="20" cy="20" rx="15" ry="7" fill="none"
-                 stroke="url(#qrGrad)" strokeWidth="1.6" opacity="0.45"
-                 transform="rotate(38 20 20)" />
-
-        {/* nucleus */}
-        <circle cx="20" cy="20" r="4.6" fill="url(#qrGrad)" />
-        <circle cx="20" cy="20" r="4.6" fill="none"
-                stroke="var(--cyan)" strokeWidth="0.8" opacity="0.6">
-          <animate attributeName="r" values="4.6;7.4;4.6" dur="3.4s"
-                   repeatCount="indefinite" />
-          <animate attributeName="opacity" values="0.6;0;0.6" dur="3.4s"
-                   repeatCount="indefinite" />
-        </circle>
-
-        {/* orbiting electron */}
-        <g transform="rotate(-28 20 20)">
-          <circle r="2.3" fill="var(--quantum)">
-            <animateMotion dur="4.2s" repeatCount="indefinite"
-                           path="M 5,20 a 15,7 0 1,0 30,0 a 15,7 0 1,0 -30,0" />
-          </circle>
-        </g>
-      </svg>
-    </span>
+    <div
+      style={{
+        width: 34,
+        height: 34,
+        borderRadius: 8,
+        background: 'var(--brand)',
+        color: '#FFFFFF',
+        display: 'grid',
+        placeItems: 'center',
+        fontWeight: 700,
+        fontSize: 14,
+        letterSpacing: '0.02em',
+        flexShrink: 0,
+      }}
+      aria-hidden="true"
+    >
+      QR
+    </div>
   )
 }
-
 
 export default function Navbar() {
   const { alerts, dismissAlert, theme, setTheme, segments, user, signOut } = useApp()
@@ -93,35 +73,24 @@ export default function Navbar() {
 
   return (
     <header className="navbar">
-      {/* Brand and page title live in the SAME flex row as everything else.
-          The previous build centred the brand with position:absolute, which put
-          it out of flow — so the LIVE and traffic chips on the right simply
-          drew on top of it. Nothing here can overlap, because nothing here is
-          out of flow. */}
       <div className="navbar-left">
         <BrandMark />
         <div className="navbar-brand-text">
-          <strong>Q&nbsp;Route</strong>
-          <span>Intelligent Urban Route Optimization</span>
+          <strong>Q Route</strong>
+          <span>Urban Route Optimization</span>
         </div>
         <span className="navbar-divider" aria-hidden="true" />
         <h2 className="navbar-page-title">{current?.label || 'Dashboard'}</h2>
       </div>
 
       <div className="navbar-right" ref={ref}>
-        {/* Transparent system status chip */}
-        <div className="live-chip">
-          <span className="dot pulse" style={{ background: 'currentColor' }} />
-          <span className="chip-text">SYSTEM ACTIVE</span>
-        </div>
-
+        {/* Clean semantic traffic status without sci-fi badge */}
         <div
-          className="badge badge-grey"
-          style={{ color: TRAFFIC_COLORS[status.level], borderColor: 'var(--border)' }}
-          title={status.label}
+          className="traffic-status-chip"
+          title={`City-wide traffic status: ${status.label}`}
         >
           <span className="dot" style={{ background: TRAFFIC_COLORS[status.level] }} />
-          <span className="chip-text">{status.label}</span>
+          <span>{status.label}</span>
         </div>
 
         <button

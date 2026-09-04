@@ -64,7 +64,7 @@ export default function LiveTraffic() {
 
       <div className="grid grid-4" style={{ marginBottom: 14 }}>
         <StatCard label="Average congestion" value={avg} decimals={1} suffix="%" tone="yellow" icon={Activity} delay={0} />
-        <StatCard label="Monitored segments" value={segments.length} tone="cyan" delay={0.05} />
+        <StatCard label="Monitored segments" value={segments.length} tone="brand" delay={0.05} />
         <StatCard label="Severe segments" value={counts.severe} tone="red" icon={TriangleAlert} delay={0.1} />
         <StatCard label="Active incidents" value={incidents.length} tone="orange" delay={0.15} />
       </div>

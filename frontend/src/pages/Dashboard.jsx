@@ -167,11 +167,11 @@ export default function Dashboard() {
                   <div className="legend-title">Active route</div>
                   <div style={{ display: 'flex', gap: 12, fontSize: 12 }}>
                     <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                      <MapPin size={11} style={{ color: 'var(--cyan)' }} />
+                      <MapPin size={11} style={{ color: 'var(--route-blue)' }} />
                       {selectedRoute.distanceKm} km
                     </span>
                     <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                      <Clock size={11} style={{ color: 'var(--cyan)' }} />
+                      <Clock size={11} style={{ color: 'var(--route-blue)' }} />
                       {selectedRoute.etaMin} min
                     </span>
                     <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
