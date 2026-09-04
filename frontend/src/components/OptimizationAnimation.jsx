@@ -86,14 +86,14 @@ export default function OptimizationAnimation({
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <Loader2 size={16} className="spin" style={{ color: 'var(--brand)' }} />
+              <Loader2 size={16} className="spin" style={{ color: 'var(--cyan)' }} />
               <strong style={{ fontSize: 13.5, color: 'var(--text)' }}>
                 Optimizing route
               </strong>
             </div>
 
             <span
-              className="badge badge-green"
+              className="badge badge-quantum"
               style={{ fontSize: 10, padding: '2px 8px' }}
             >
               {algorithmName}
@@ -116,7 +116,7 @@ export default function OptimizationAnimation({
                     gap: 10,
                     fontSize: 12.5,
                     color: isCurrent
-                      ? 'var(--brand)'
+                      ? 'var(--cyan)'
                       : isDone
                       ? 'var(--text)'
                       : 'var(--text-faint)',
@@ -134,16 +134,16 @@ export default function OptimizationAnimation({
                       fontSize: 11,
                       flexShrink: 0,
                       background: isDone
-                        ? 'var(--brand-light)'
+                        ? 'rgba(52, 211, 153, 0.12)'
                         : isCurrent
-                        ? '#FFFFFF'
+                        ? 'rgba(255, 179, 71, 0.15)'
                         : 'transparent',
                       border: isDone
-                        ? '1px solid var(--brand)'
+                        ? '1px solid var(--low)'
                         : isCurrent
-                        ? '1.5px solid var(--brand)'
+                        ? '1.5px solid var(--cyan)'
                         : '1px solid var(--border)',
-                      color: isDone || isCurrent ? 'var(--brand)' : 'var(--text-faint)',
+                      color: isDone ? 'var(--low)' : isCurrent ? 'var(--cyan)' : 'var(--text-faint)',
                     }}
                   >
                     {isDone ? (
@@ -185,7 +185,8 @@ export default function OptimizationAnimation({
               className="progress-fill"
               style={{
                 width: `${progress}%`,
-                background: 'var(--brand)',
+                background: 'linear-gradient(90deg, #FF6B35, #E83E8C)',
+                boxShadow: '0 0 10px rgba(255, 107, 53, 0.35)',
               }}
               transition={{ duration: 0.2 }}
             />

@@ -21,18 +21,7 @@ import {
 const pin = (label, color) =>
   L.divIcon({
     className: '',
-    html: `
-      <div
-        class="marker-pin"
-        style="
-          background:${color};
-          box-shadow:0 1px 3px rgba(0,0,0,0.2);
-        "
-
-      >
-        ${label}
-      </div>
-    `,
+    html: `<div class="marker-pin" style="background:${color};box-shadow:0 0 14px ${color}">${label}</div>`,
     iconSize: [26, 26],
     iconAnchor: [13, 13],
   })

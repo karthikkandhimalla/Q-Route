@@ -20,7 +20,7 @@
  * rather than crash it.
  */
 
-const ROUTE_COLORS = ['#34d399', '#fbbf24', '#fb923c', '#2dd4bf', '#e879f9']
+const ROUTE_COLORS = ['#FF6B35', '#FFB347', '#E83E8C', '#FFB020', '#FF4D5A']
 
 /** Backend coordinates are [{lat, lon}]; Leaflet wants [[lat, lon]]. */
 function toPath(coordinates) {
@@ -103,9 +103,9 @@ export function mapOptimizeResponse(primary, alternatives = [], meta = {}) {
 }
 
 const LEVEL_COLORS = {
-  low: '#34d399',
-  moderate: '#fbbf24',
-  heavy: '#fb923c',
+  low: '#A3E635',
+  moderate: '#FFB020',
+  heavy: '#FF6B35',
   severe: '#f43f5e',
 }
 

@@ -17,7 +17,7 @@ export default function TrafficLegend({ showRoutes = true }) {
           <div className="legend-row">
             <span
               className="legend-swatch"
-              style={{ background: '#2F6FED', height: 4 }}
+              style={{ background: '#FF6B35', height: 4 }}
             />
             <span style={{ color: 'var(--text)', fontWeight: 500, fontSize: 11.5 }}>Recommended</span>
           </div>

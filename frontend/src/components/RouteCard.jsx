@@ -165,7 +165,7 @@ const RouteCard = forwardRef(function RouteCard({ route, onCompareAlternatives }
         style={{
           padding: '12px 14px',
           borderRadius: 'var(--radius-sm)',
-          background: '#FFFFFF',
+          background: 'var(--surface-elevated)',
           border: '1px solid var(--border)',
           marginBottom: 16,
         }}

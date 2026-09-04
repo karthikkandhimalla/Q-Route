@@ -2,9 +2,9 @@ import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, X
 import { Activity } from 'lucide-react'
 
 const SERIES = [
-  { key: 'QPSO', color: '#1F4D3A', width: 2.5 },
-  { key: 'PSO', color: '#2F6FED', width: 2.0 },
-  { key: 'GA', color: '#D97706', width: 2.0 },
+  { key: 'QPSO', color: '#E83E8C', width: 2.5 },
+  { key: 'PSO', color: '#FF6B35', width: 2.0 },
+  { key: 'GA', color: '#FFB347', width: 2.0 },
 ]
 
 export default function ConvergenceChart({ data = [], summary = {}, height = 300 }) {
@@ -37,12 +37,12 @@ export default function ConvergenceChart({ data = [], summary = {}, height = 300
             />
             <Tooltip
               contentStyle={{
-                background: '#FFFFFF',
-                border: '1px solid var(--border)',
+                background: 'var(--surface-elevated)',
+                border: '1px solid var(--border-color)',
                 borderRadius: 8,
                 fontSize: 12,
-                color: 'var(--text)',
-                boxShadow: 'var(--shadow-md)',
+                color: 'var(--text-primary)',
+                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.65)',
               }}
             />
             <Legend wrapperStyle={{ fontSize: 11.5, color: 'var(--text-dim)' }} />

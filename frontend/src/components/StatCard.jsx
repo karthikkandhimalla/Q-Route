@@ -4,13 +4,13 @@ import { TrendingDown, TrendingUp } from 'lucide-react'
 
 const TONES = {
   brand: 'var(--brand)',
-  cyan: 'var(--brand)',
+  cyan: 'var(--cyan)',
   green: 'var(--low)',
   yellow: 'var(--moderate)',
   orange: 'var(--heavy)',
   red: 'var(--severe)',
-  blue: 'var(--route-blue)',
-  quantum: 'var(--brand)',
+  blue: 'var(--cyan)',
+  quantum: 'var(--pink)',
 }
 
 /** Counts from 0 to `value` once, on mount. Respects reduced-motion. */

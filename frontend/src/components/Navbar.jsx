@@ -31,7 +31,7 @@ function BrandMark() {
         width: 34,
         height: 34,
         borderRadius: 8,
-        background: 'var(--brand)',
+        background: 'var(--grad-cta)',
         color: '#FFFFFF',
         display: 'grid',
         placeItems: 'center',
@@ -39,6 +39,7 @@ function BrandMark() {
         fontSize: 14,
         letterSpacing: '0.02em',
         flexShrink: 0,
+        boxShadow: '0 2px 12px rgba(255, 107, 53, 0.3)',
       }}
       aria-hidden="true"
     >

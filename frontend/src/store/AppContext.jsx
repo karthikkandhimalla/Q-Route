@@ -104,7 +104,7 @@ export function AppProvider({ children }) {
   }, [])
 
   /* --- preferences ------------------------------------------------------ */
-  const [theme, setTheme] = useState(() => read('qro.theme', 'light'))
+  const [theme, setTheme] = useState(() => read('qro.theme', 'dark'))
   const [collapsed, setCollapsed] = useState(() => read('qro.sidebar', false))
   const [settings, setSettings] = useState(() =>
     read('qro.settings', {

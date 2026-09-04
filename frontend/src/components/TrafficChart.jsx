@@ -8,12 +8,12 @@ const axisTick = { fill: 'var(--text-dim)', fontSize: 11 }
 const gridStroke = 'var(--border)'
 
 const tooltipStyle = {
-  background: '#FFFFFF',
-  border: '1px solid var(--border)',
+  background: 'var(--surface-elevated)',
+  border: '1px solid var(--border-color)',
   borderRadius: 8,
   fontSize: 12,
-  color: 'var(--text)',
-  boxShadow: 'var(--shadow-md)',
+  color: 'var(--text-primary)',
+  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.65)',
 }
 
 export function TrafficTrendChart({ data = [], height = 260 }) {
@@ -22,9 +22,10 @@ export function TrafficTrendChart({ data = [], height = 260 }) {
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart data={data} margin={{ top: 8, right: 12, left: -16, bottom: 0 }}>
           <defs>
-            <linearGradient id="gTrendWarm" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#1F4D3A" stopOpacity={0.16} />
-              <stop offset="100%" stopColor="#1F4D3A" stopOpacity={0.01} />
+            <linearGradient id="gTrendQuantum" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#E83E8C" stopOpacity={0.35} />
+              <stop offset="70%" stopColor="#FF6B35" stopOpacity={0.08} />
+              <stop offset="100%" stopColor="#FF6B35" stopOpacity={0.01} />
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray="3 3" stroke={gridStroke} vertical={false} />
@@ -35,10 +36,10 @@ export function TrafficTrendChart({ data = [], height = 260 }) {
             type="monotone"
             dataKey="congestion"
             name="Congestion %"
-            stroke="#1F4D3A"
+            stroke="#FF6B35"
             strokeWidth={2.5}
-            fill="url(#gTrendWarm)"
-            animationDuration={800}
+            fill="url(#gTrendQuantum)"
+            animationDuration={850}
           />
         </AreaChart>
       </ResponsiveContainer>
@@ -81,8 +82,8 @@ export function RoutePerformanceChart({ data = [], height = 260 }) {
           <YAxis axisLine={false} tickLine={false} tick={axisTick} />
           <Tooltip contentStyle={tooltipStyle} cursor={{ fill: 'var(--panel-hover)' }} />
           <Legend wrapperStyle={legendStyle} />
-          <Bar dataKey="distance" name="Distance (km)" fill="#2F6FED" radius={[4, 4, 0, 0]} animationDuration={800} />
-          <Bar dataKey="time" name="Time (min)" fill="#1F4D3A" radius={[4, 4, 0, 0]} animationDuration={800} animationBegin={120} />
+          <Bar dataKey="distance" name="Distance (km)" fill="#FF6B35" radius={[4, 4, 0, 0]} animationDuration={800} />
+          <Bar dataKey="time" name="Time (min)" fill="#E83E8C" radius={[4, 4, 0, 0]} animationDuration={800} animationBegin={120} />
         </BarChart>
       </ResponsiveContainer>
     </div>
@@ -101,7 +102,7 @@ export function TrafficDistributionChart({ data = [], height = 260 }) {
             innerRadius="50%"
             outerRadius="76%"
             paddingAngle={2}
-            stroke="#FFFFFF"
+            stroke="var(--surface)"
             strokeWidth={1}
             animationDuration={800}
             label={({ name, value }) => `${name} ${value}%`}
@@ -135,10 +136,10 @@ export function ScalabilityChart({ data = [], height = 280 }) {
           <YAxis axisLine={false} tickLine={false} tick={axisTick} unit="ms" />
           <Tooltip contentStyle={tooltipStyle} cursor={{ fill: 'var(--panel-hover)' }} />
           <Legend wrapperStyle={legendStyle} />
-          <Bar dataKey="dijkstra" name="Dijkstra" fill="#68736D" radius={[4, 4, 0, 0]} />
-          <Bar dataKey="qpso" name="QPSO" fill="#1F4D3A" radius={[4, 4, 0, 0]} />
-          <Bar dataKey="pso" name="PSO" fill="#2F6FED" radius={[4, 4, 0, 0]} />
-          <Bar dataKey="ga" name="GA" fill="#D97706" radius={[4, 4, 0, 0]} />
+          <Bar dataKey="dijkstra" name="Dijkstra" fill="#64748B" radius={[4, 4, 0, 0]} />
+          <Bar dataKey="qpso" name="QPSO" fill="#E83E8C" radius={[4, 4, 0, 0]} />
+          <Bar dataKey="pso" name="PSO" fill="#FF6B35" radius={[4, 4, 0, 0]} />
+          <Bar dataKey="ga" name="GA" fill="#FFB347" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>

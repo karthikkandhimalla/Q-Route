@@ -23,12 +23,12 @@ export default function PredictionCard({ series = [], title = 'Congestion Foreca
           <AreaChart data={series} margin={{ top: 4, right: 6, left: -22, bottom: 0 }}>
             <defs>
               <linearGradient id="gActual" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#1F4D3A" stopOpacity={0.2} />
-                <stop offset="100%" stopColor="#1F4D3A" stopOpacity={0.02} />
+                <stop offset="0%" stopColor="#A3E635" stopOpacity={0.2} />
+                <stop offset="100%" stopColor="#A3E635" stopOpacity={0.02} />
               </linearGradient>
               <linearGradient id="gPred" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#D97706" stopOpacity={0.2} />
-                <stop offset="100%" stopColor="#D97706" stopOpacity={0.02} />
+                <stop offset="0%" stopColor="#FFB347" stopOpacity={0.2} />
+                <stop offset="100%" stopColor="#FFB347" stopOpacity={0.02} />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
@@ -36,7 +36,7 @@ export default function PredictionCard({ series = [], title = 'Congestion Foreca
             <YAxis domain={[0, 100]} axisLine={false} tickLine={false} tick={{ fill: 'var(--text-dim)', fontSize: 11 }} unit="%" />
             <Tooltip
               contentStyle={{
-                background: '#FFFFFF',
+                background: 'var(--surface-elevated)',
                 border: '1px solid var(--border)',
                 borderRadius: 8,
                 fontSize: 12,
@@ -47,11 +47,11 @@ export default function PredictionCard({ series = [], title = 'Congestion Foreca
             />
             <Area
               type="monotone" dataKey="actual" name="Actual"
-              stroke="#1F4D3A" strokeWidth={2} fill="url(#gActual)" connectNulls={false}
+              stroke="#A3E635" strokeWidth={2} fill="url(#gActual)" connectNulls={false}
             />
             <Area
               type="monotone" dataKey="predicted" name="Predicted"
-              stroke="#D97706" strokeWidth={2} strokeDasharray="5 4" fill="url(#gPred)"
+              stroke="#FFB347" strokeWidth={2} strokeDasharray="5 4" fill="url(#gPred)"
             />
           </AreaChart>
         </ResponsiveContainer>
@@ -59,10 +59,10 @@ export default function PredictionCard({ series = [], title = 'Congestion Foreca
 
       <div style={{ display: 'flex', gap: 16, marginTop: 10, fontSize: 11.5 }}>
         <span style={{ display: 'flex', alignItems: 'center', gap: 6, color: 'var(--text-dim)' }}>
-          <span className="legend-swatch" style={{ background: '#1F4D3A' }} /> Measured now
+          <span className="legend-swatch" style={{ background: '#A3E635' }} /> Measured now
         </span>
         <span style={{ display: 'flex', alignItems: 'center', gap: 6, color: 'var(--text-dim)' }}>
-          <span className="legend-swatch" style={{ background: '#D97706' }} /> Projected
+          <span className="legend-swatch" style={{ background: '#FFB347' }} /> Projected
         </span>
       </div>
 

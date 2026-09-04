@@ -135,10 +135,14 @@ export default function RouteSelector({ onOptimize, busy }) {
         onClick={onOptimize}
         disabled={busy || !ready}
       >
-        <Navigation size={15} />
+        {busy ? (
+          <Zap size={15} className="spin" style={{ color: '#FFB347' }} />
+        ) : (
+          <Navigation size={15} />
+        )}
 
         <span>
-          {busy ? 'Finding Optimal Route…' : 'Find Optimal Route'}
+          {busy ? 'Computing Quantum Route…' : 'Find Optimal Route'}
         </span>
       </button>
 
