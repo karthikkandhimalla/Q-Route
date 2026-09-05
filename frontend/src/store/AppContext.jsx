@@ -9,6 +9,7 @@ import {
   DEFAULT_END, DEFAULT_START, REROUTED_ROUTE, ROUTES, TRAFFIC_SEGMENTS,
 } from '../data/mockData'
 import * as api from '../services/api'
+import { mapOptimizeResponse } from '../services/backendAdapter'
 
 const AppContext = createContext(null)
 
@@ -209,6 +210,28 @@ export function AppProvider({ children }) {
     }
   }, [start, end, algorithm, mode])
 
+  const applyAssistantActions = useCallback((actions = []) => {
+    actions.forEach((action) => {
+      if (action.type === 'set_start') setStart(action.payload)
+      if (action.type === 'set_destination') setEnd(action.payload)
+      if (action.type === 'route_result') {
+        const { primary, alternatives = [] } = action.payload
+        const mapped = mapOptimizeResponse(primary, alternatives, { from: start?.name, to: end?.name, mode })
+        setRoutes(mapped.routes)
+        setSelectedRouteId(mapped.recommended.id)
+        setRoutesVersion((v) => v + 1)
+      }
+      if (action.type === 'alternatives') {
+        const rawRoutes = action.payload.routes || []
+        if (rawRoutes.length) {
+          const mapped = mapOptimizeResponse(rawRoutes[0], rawRoutes.slice(1), { from: start?.name, to: end?.name, mode })
+          setRoutes(mapped.routes)
+          setSelectedRouteId(mapped.recommended.id)
+        }
+      }
+    })
+  }, [mode, start?.name, end?.name])
+
   /** Spikes congestion on the active corridor — the trigger for rerouting. */
   const injectCongestion = useCallback(() => {
     setSegments((prev) =>
@@ -363,6 +386,7 @@ export function AppProvider({ children }) {
     algorithm, setAlgorithm, mode, setMode,
     routes, selectedRoute, selectedRouteId, setSelectedRouteId,
     optimizing, optimize, error,
+      applyAssistantActions,
     routesVersion,
     segments, incidents, alerts, dismissAlert,
     refreshAlerts, raiseAlert, wipeAlerts,

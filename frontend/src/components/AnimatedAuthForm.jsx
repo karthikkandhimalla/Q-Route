@@ -17,7 +17,7 @@ const MESSAGES = {
   password2: 'Turning around! Your password is 100% private 🙈🔒',
 }
 
-function Robot({ turned }) {
+export function Robot({ turned }) {
   const robotZoneRef = useRef(null)
   const leftEyeRef = useRef(null)
   const rightEyeRef = useRef(null)

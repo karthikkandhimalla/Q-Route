@@ -397,6 +397,42 @@
   min-height: calc(100vh - var(--navbar-h) - 44px);
 }
 
+/* Floating natural-language route assistant */
+.assistant-float { position: fixed; right: 24px; bottom: 24px; z-index: 1500; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+.assistant-panel { width: min(380px, calc(100vw - 32px)); display: flex; flex-direction: column; gap: 10px; padding: 16px; border: 1px solid var(--border-strong); border-radius: var(--radius); background: var(--grad-surface); box-shadow: var(--shadow-lg), 0 0 30px var(--brand-glow); transform-origin: bottom right; }
+.assistant-heading { display: flex; align-items: center; gap: 7px; min-height: 20px; }
+.assistant-title { display: inline-flex; align-items: center; gap: 7px; color: var(--text); font-size: 12px; font-weight: 700; }
+.assistant-status { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; color: var(--quantum); font-size: 10px; }
+.assistant-close { display: grid; place-items: center; width: 26px; height: 26px; margin-left: 3px; padding: 0; border: 1px solid transparent; border-radius: 6px; background: transparent; color: var(--text-dim); cursor: pointer; }
+.assistant-close:hover { border-color: var(--border); color: var(--text); background: var(--panel-hover); }
+.assistant-float-button { position: relative; display: grid; place-items: center; width: 84px; height: 96px; padding: 0; border: 0; background: transparent; color: #fff; cursor: pointer; filter: drop-shadow(0 7px 10px rgba(0, 0, 0, 0.38)) drop-shadow(0 0 10px var(--brand-glow)); transition: transform 180ms var(--ease), filter 180ms var(--ease); }
+.assistant-float-button:hover { transform: scale(1.06); filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.44)) drop-shadow(0 0 16px var(--brand-glow)); }
+.assistant-float-button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+.assistant-float-button .qro-robot-zone { width: 78px; height: 86px; margin: 0; transform: scale(.76); transform-origin: center; animation: assistant-robot-float 3.8s ease-in-out infinite; }
+.assistant-float-button .qro-robot { animation: assistant-robot-breathe 3.8s ease-in-out infinite; }
+.assistant-pulse { position: absolute; inset: 28px 16px 18px; border-radius: 50%; background: rgba(255, 179, 71, 0.2); filter: blur(13px); animation: assistant-pulse 2.8s ease-in-out infinite; pointer-events: none; }
+@keyframes assistant-robot-float { 0%, 100% { transform: scale(.76) translateY(1px); } 50% { transform: scale(.76) translateY(-4px); } }
+@keyframes assistant-robot-breathe { 0%, 100% { filter: drop-shadow(0 0 3px rgba(255, 179, 71, 0.14)); } 50% { filter: drop-shadow(0 0 7px rgba(255, 179, 71, 0.3)); } }
+@keyframes assistant-pulse { 0%, 100% { opacity: .2; transform: scale(.88); } 50% { opacity: .42; transform: scale(1.05); } }
+.assistant-thread { display: flex; flex-direction: column; gap: 8px; max-height: 210px; overflow-y: auto; }
+.assistant-empty { display: grid; gap: 4px; color: var(--text-dim); font-size: 11px; line-height: 1.45; }
+.assistant-empty strong { color: var(--text); font-size: 12px; }
+.assistant-message { max-width: 92%; padding: 8px 10px; border-radius: 8px; font-size: 11.5px; line-height: 1.45; white-space: pre-wrap; }
+.assistant-message.user { align-self: flex-end; background: var(--brand); color: #fff; }
+.assistant-message.assistant { align-self: flex-start; display: flex; align-items: center; gap: 6px; background: var(--panel-hover); color: var(--text); }
+.assistant-suggestions { display: flex; flex-wrap: wrap; gap: 5px; }
+.assistant-suggestions button { border: 1px solid var(--border); border-radius: 999px; padding: 5px 8px; background: transparent; color: var(--text-dim); cursor: pointer; font-size: 10px; }
+.assistant-suggestions button:hover { border-color: var(--brand); color: var(--text); }
+.assistant-composer { display: flex; align-items: center; gap: 6px; border: 1px solid var(--border); border-radius: 8px; padding: 2px 3px 2px 9px; }
+.assistant-composer:focus-within { border-color: var(--brand); }
+.assistant-composer input { min-width: 0; flex: 1; border: 0; outline: 0; background: transparent; color: var(--text); font: inherit; font-size: 11.5px; padding: 7px 0; }
+.assistant-composer input::placeholder { color: var(--text-dim); }
+.assistant-error { margin: 0; color: var(--severe); font-size: 10.5px; line-height: 1.4; }
+@media (max-width: 560px) {
+  .assistant-float { right: 16px; bottom: 76px; }
+  .assistant-panel { width: calc(100vw - 32px); }
+}
+
 .dash-col {
   display: flex;
   flex-direction: column;
