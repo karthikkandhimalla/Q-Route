@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Loader2, MessageCircle, Send, Sparkles, X } from 'lucide-react'
 import { useApp } from '../store/AppContext'
@@ -10,6 +10,93 @@ const suggestions = [
   'Can you find another way?',
   'Why is this route better?',
 ]
+
+function AssistantRobot({ busy, open, onClick }) {
+  const stageRef = useRef(null)
+  const targetRef = useRef({ x: 0, y: 0 })
+  const currentRef = useRef({ x: 0, y: 0 })
+  const frameRef = useRef(null)
+  const [blinking, setBlinking] = useState(false)
+  const [near, setNear] = useState(false)
+
+  useEffect(() => {
+    const stage = stageRef.current
+    if (!stage) return undefined
+
+    const update = () => {
+      const rect = stage.getBoundingClientRect()
+      const centerX = rect.left + rect.width / 2
+      const centerY = rect.top + rect.height / 2
+      const dx = Math.max(-1, Math.min(1, (targetRef.current.x - centerX) / 220))
+      const dy = Math.max(-1, Math.min(1, (targetRef.current.y - centerY) / 220))
+      const distanceX = Math.max(rect.left - targetRef.current.x, 0, targetRef.current.x - rect.right)
+      const distanceY = Math.max(rect.top - targetRef.current.y, 0, targetRef.current.y - rect.bottom)
+      const proximity = Math.max(0, 1 - Math.hypot(distanceX, distanceY) / 180)
+
+      currentRef.current.x += (dx * 3 - currentRef.current.x) * 0.12
+      currentRef.current.y += (dy * 2 - currentRef.current.y) * 0.12
+      stage.style.setProperty('--eye-x', `${currentRef.current.x.toFixed(2)}px`)
+      stage.style.setProperty('--eye-y', `${currentRef.current.y.toFixed(2)}px`)
+      stage.style.setProperty('--robot-tilt', `${(dx * 2.2 * proximity).toFixed(2)}deg`)
+      stage.style.setProperty('--robot-scale', (1 + proximity * 0.035).toFixed(3))
+      stage.style.setProperty('--robot-near', proximity.toFixed(2))
+      setNear((value) => {
+        const nextValue = proximity > 0.05
+        return value === nextValue ? value : nextValue
+      })
+      frameRef.current = requestAnimationFrame(update)
+    }
+
+    const handleMouseMove = (event) => {
+      targetRef.current = { x: event.clientX, y: event.clientY }
+    }
+
+    document.addEventListener('mousemove', handleMouseMove)
+    frameRef.current = requestAnimationFrame(update)
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove)
+      cancelAnimationFrame(frameRef.current)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+    let timeoutId
+    const scheduleBlink = () => {
+      timeoutId = window.setTimeout(() => {
+        setBlinking(true)
+        window.setTimeout(() => setBlinking(false), 120)
+        scheduleBlink()
+      }, 3000 + Math.random() * 3000)
+    }
+    scheduleBlink()
+    return () => window.clearTimeout(timeoutId)
+  }, [])
+
+  return (
+    <button
+      ref={stageRef}
+      className={`assistant-float-button ${near ? 'is-near' : ''} ${busy ? 'is-thinking' : ''}`}
+      type="button"
+      onClick={onClick}
+      aria-label="Ask Q Route AI"
+      aria-expanded={open}
+      title="Ask Q Route AI"
+    >
+      <span className="assistant-pulse" aria-hidden="true" />
+      <span className="assistant-robot-art">
+        <span className={`assistant-eye-layer ${blinking ? 'is-blinking' : ''}`} aria-hidden="true">
+          <span className="assistant-eye assistant-eye-left" />
+          <span className="assistant-eye assistant-eye-right" />
+        </span>
+        <img className="assistant-robot-image" src={robotImage} alt="Q Route AI" />
+        <span className={`assistant-hand-layer ${near || open ? 'is-waving' : ''} ${busy ? 'is-thinking' : ''}`} aria-hidden="true">
+          <img src={robotImage} alt="" />
+        </span>
+      </span>
+    </button>
+  )
+}
 
 export default function AssistantPanel() {
   const { start, end, selectedRoute, routes, segments, incidents, applyAssistantActions } = useApp()
@@ -96,17 +183,7 @@ export default function AssistantPanel() {
         )}
       </AnimatePresence>
 
-      <button
-        className="assistant-float-button"
-        type="button"
-        onClick={() => setOpen((value) => !value)}
-        aria-label="Ask Q Route AI"
-        aria-expanded={open}
-        title="Ask Q Route AI"
-      >
-        <span className="assistant-pulse" aria-hidden="true" />
-        <img className="assistant-robot-image" src={robotImage} alt="Q Route AI" />
-      </button>
+      <AssistantRobot busy={busy} open={open} onClick={() => setOpen((value) => !value)} />
     </div>
   )
 }
