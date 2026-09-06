@@ -3305,3 +3305,31 @@
     transition: none !important;
   }
 }
+
+/* Keep notifications anchored below the floating navbar. */
+.notif-panel {
+  position: absolute;
+  top: calc(var(--navbar-h) + 12px);
+  right: 24px;
+  max-height: calc(100vh - var(--navbar-h) - 36px);
+  overflow-y: auto;
+}
+
+@media (max-width: 560px) {
+  .notif-panel {
+    right: 12px;
+    width: min(330px, calc(100vw - 24px));
+    max-height: calc(100vh - var(--navbar-h) - 36px);
+  }
+}
+
+/* Keep the desktop dashboard on the same 12px outer alignment grid. */
+@media (min-width: 901px) {
+  .page {
+    padding: 0 12px 36px;
+  }
+
+  .dash-grid {
+    gap: 12px;
+  }
+}
