@@ -88,7 +88,7 @@ export default function OptimizationAnimation({
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <Loader2 size={16} className="spin" style={{ color: 'var(--cyan)' }} />
               <strong style={{ fontSize: 13.5, color: 'var(--text)' }}>
-                Optimizing route
+                {algorithmName} Optimization Running
               </strong>
             </div>
 

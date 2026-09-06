@@ -35,13 +35,13 @@ export default function LiveTraffic() {
     <>
       <div className="row-between page-head">
         <div>
-          <h1>Traffic Monitor</h1>
-          <p>Network congestion, segment speeds, and active incident alerts.</p>
+          <h1>Live Traffic</h1>
+          <p>Congestion and incidents across the Hyderabad network.</p>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <span style={{ fontSize: 11, color: 'var(--text-faint)', display: 'flex', alignItems: 'center', gap: 5 }}>
             <Clock size={11} />
-            Last updated {updatedAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+            Updated {updatedAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
           </span>
           <button className="btn btn-sm" onClick={refresh} disabled={refreshing}>
             <motion.span
@@ -51,7 +51,7 @@ export default function LiveTraffic() {
             >
               <RefreshCw size={13} />
             </motion.span>
-            Refresh Data
+            Refresh
           </button>
         </div>
       </div>

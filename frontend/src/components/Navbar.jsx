@@ -26,25 +26,40 @@ function cityStatus(segments) {
  */
 function BrandMark() {
   return (
-    <div
-      style={{
-        width: 34,
-        height: 34,
-        borderRadius: 8,
-        background: 'var(--grad-cta)',
-        color: '#FFFFFF',
-        display: 'grid',
-        placeItems: 'center',
-        fontWeight: 700,
-        fontSize: 14,
-        letterSpacing: '0.02em',
-        flexShrink: 0,
-        boxShadow: '0 2px 12px rgba(255, 107, 53, 0.3)',
-      }}
-      aria-hidden="true"
-    >
-      QR
-    </div>
+    <span className="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 40 40" width="34" height="34">
+        <defs>
+          <linearGradient id="qrGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="var(--blue)" />
+            <stop offset="55%" stopColor="var(--cyan)" />
+            <stop offset="100%" stopColor="var(--quantum)" />
+          </linearGradient>
+        </defs>
+
+        <ellipse cx="20" cy="20" rx="15" ry="7" fill="none"
+                 stroke="url(#qrGrad)" strokeWidth="1.6" opacity="0.75"
+                 transform="rotate(-28 20 20)" />
+        <ellipse cx="20" cy="20" rx="15" ry="7" fill="none"
+                 stroke="url(#qrGrad)" strokeWidth="1.6" opacity="0.45"
+                 transform="rotate(38 20 20)" />
+
+        <circle cx="20" cy="20" r="4.6" fill="url(#qrGrad)" />
+        <circle cx="20" cy="20" r="4.6" fill="none"
+                stroke="var(--cyan)" strokeWidth="0.8" opacity="0.6">
+          <animate attributeName="r" values="4.6;7.4;4.6" dur="3.4s"
+                   repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.6;0;0.6" dur="3.4s"
+                   repeatCount="indefinite" />
+        </circle>
+
+        <g transform="rotate(-28 20 20)">
+          <circle r="2.3" fill="var(--quantum)">
+            <animateMotion dur="4.2s" repeatCount="indefinite"
+                           path="M 5,20 a 15,7 0 1,0 30,0 a 15,7 0 1,0 -30,0" />
+          </circle>
+        </g>
+      </svg>
+    </span>
   )
 }
 
@@ -78,14 +93,18 @@ export default function Navbar() {
         <BrandMark />
         <div className="navbar-brand-text">
           <strong>Q Route</strong>
-          <span>Urban Route Optimization</span>
+          <span>QUANTUM ROUTE OPTIMIZER</span>
         </div>
         <span className="navbar-divider" aria-hidden="true" />
         <h2 className="navbar-page-title">{current?.label || 'Dashboard'}</h2>
       </div>
 
       <div className="navbar-right" ref={ref}>
-        {/* Clean semantic traffic status without sci-fi badge */}
+        <div className="live-chip">
+          <span className="dot pulse" style={{ background: 'currentColor' }} />
+          <span>LIVE</span>
+        </div>
+
         <div
           className="traffic-status-chip"
           title={`City-wide traffic status: ${status.label}`}

@@ -29,7 +29,7 @@ export default function BenchmarkTable({ data }) {
       <div className="row-between" style={{ marginBottom: 12 }}>
         <div className="card-title" style={{ margin: 0 }}>
           <Info size={14} />
-          Algorithm Performance Comparison
+          Algorithm Comparison
         </div>
         <span style={{ fontSize: 11.5, color: 'var(--text-dim)' }}>{data.problem}</span>
       </div>
@@ -66,7 +66,7 @@ export default function BenchmarkTable({ data }) {
                       <strong>{r.algorithm}</strong>
                       {r.algorithm === 'QPSO' && (
                         <span className="badge badge-green" style={{ padding: '1px 6px', fontSize: 10 }}>
-                          Metaheuristic
+                          Q
                         </span>
                       )}
                       {!r.deterministic && (
@@ -75,7 +75,7 @@ export default function BenchmarkTable({ data }) {
                           style={{ padding: '1px 6px', fontSize: 10 }}
                           title={`Stochastic — results averaged over ${r.trials ?? trials ?? 'multiple'} independent trials`}
                         >
-                          Stochastic
+                          stoch
                         </span>
                       )}
                     </div>

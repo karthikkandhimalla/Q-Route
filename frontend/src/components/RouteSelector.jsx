@@ -57,7 +57,7 @@ export default function RouteSelector({ onOptimize, busy }) {
       {/* START LOCATION */}
       <PlaceInput
         id="start"
-        label="FROM"
+        label="Start location"
         value={start}
         onChange={setStart}
         placeholder="Type start location in Hyderabad…"
@@ -79,7 +79,7 @@ export default function RouteSelector({ onOptimize, busy }) {
       {/* DESTINATION */}
       <PlaceInput
         id="end"
-        label="TO"
+        label="Destination"
         value={end}
         onChange={setEnd}
         placeholder="Type destination in Hyderabad…"
@@ -88,7 +88,7 @@ export default function RouteSelector({ onOptimize, busy }) {
 
       {/* ALGORITHM */}
       <div className="field route-field">
-        <label htmlFor="algo">Optimization Algorithm</label>
+        <label htmlFor="algo">Algorithm</label>
 
         <select
           id="algo"
@@ -106,14 +106,14 @@ export default function RouteSelector({ onOptimize, busy }) {
         {activeAlgo?.quantum && (
           <div className="badge badge-quantum quantum-badge">
             <Zap size={9} />
-            QPSO Metaheuristic
+            Quantum-inspired
           </div>
         )}
       </div>
 
       {/* OPTIMIZATION OBJECTIVE */}
       <div className="field route-field">
-        <label>Travel Preference</label>
+        <label>Optimization objective</label>
 
         <div className="segmented route-segmented">
           {OPTIMIZATION_MODES.map((m) => (
@@ -142,7 +142,7 @@ export default function RouteSelector({ onOptimize, busy }) {
         )}
 
         <span>
-          {busy ? 'Computing Quantum Route…' : 'Find Optimal Route'}
+          {busy ? 'Optimizing…' : 'Optimize Route'}
         </span>
       </button>
 

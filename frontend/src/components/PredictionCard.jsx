@@ -59,10 +59,10 @@ export default function PredictionCard({ series = [], title = 'Congestion Foreca
 
       <div style={{ display: 'flex', gap: 16, marginTop: 10, fontSize: 11.5 }}>
         <span style={{ display: 'flex', alignItems: 'center', gap: 6, color: 'var(--text-dim)' }}>
-          <span className="legend-swatch" style={{ background: '#A3E635' }} /> Measured now
+          <span className="legend-swatch" style={{ background: '#A3E635' }} /> Actual
         </span>
         <span style={{ display: 'flex', alignItems: 'center', gap: 6, color: 'var(--text-dim)' }}>
-          <span className="legend-swatch" style={{ background: '#FFB347' }} /> Projected
+          <span className="legend-swatch" style={{ background: '#FFB347' }} /> Predicted
         </span>
       </div>
 

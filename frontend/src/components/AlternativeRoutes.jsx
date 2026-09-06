@@ -12,7 +12,7 @@ export default function AlternativeRoutes({ routes, selectedId, onSelect }) {
       <div className="row-between" style={{ marginBottom: 12 }}>
         <div className="card-title" style={{ margin: 0 }}>
           <GitBranch size={13} />
-          Route Alternatives ({routes.length})
+          All Routes ({routes.length})
         </div>
 
         <div className="segmented" style={{ padding: 2 }}>
@@ -58,7 +58,7 @@ export default function AlternativeRoutes({ routes, selectedId, onSelect }) {
                 {r.label}
                 {r.recommended && (
                   <span className="badge badge-green" style={{ marginLeft: 6, padding: '1px 6px' }}>
-                    Recommended
+                    Best
                   </span>
                 )}
               </strong>

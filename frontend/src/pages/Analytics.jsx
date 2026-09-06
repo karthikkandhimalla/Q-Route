@@ -84,7 +84,7 @@ export default function Analytics() {
       {data?.isDemoData && (
         <div className="demo-notice">
           <Activity size={13} />
-          <strong>Simulation Data:</strong> Analytics aggregated from 1,284 optimization trials on the Hyderabad road network graph.
+          Demo data — replace via <code>src/services/api.js</code> once the backend is live.
         </div>
       )}
 
@@ -109,7 +109,7 @@ export default function Analytics() {
         {data ? (
           <PredictionCard
             series={data.prediction}
-            title="Congestion Projection — next 30 min"
+            title="Actual vs Predicted Congestion"
             note={data.predictionNote}
           />
         ) : (

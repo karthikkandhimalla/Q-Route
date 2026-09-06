@@ -89,7 +89,7 @@ export default function Benchmark() {
       ) : (
         <div className="demo-notice" style={{ marginBottom: 14 }}>
           <Info size={13} />
-          <strong>Simulated Benchmark Dataset:</strong> Measured from 30 independent trials on the Hyderabad Graph.
+          Demo data — these are placeholder figures, not a validated benchmark run. Replace them with real results from benchmarking/benchmark.py.
         </div>
       )}
 

@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Loader2, MessageCircle, Send, Sparkles, X } from 'lucide-react'
 import { useApp } from '../store/AppContext'
 import * as api from '../services/api'
-import { Robot } from './AnimatedAuthForm'
+import robotImage from '../assets/q-route-ai-robot.png'
 
 const suggestions = [
   'Find a route from HITEC City to Charminar',
@@ -105,7 +105,7 @@ export default function AssistantPanel() {
         title="Ask Q Route AI"
       >
         <span className="assistant-pulse" aria-hidden="true" />
-        <Robot turned={false} />
+        <img className="assistant-robot-image" src={robotImage} alt="Q Route AI" />
       </button>
     </div>
   )

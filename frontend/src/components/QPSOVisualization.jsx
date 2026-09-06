@@ -1,151 +1,107 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Cpu, ChevronDown, ChevronUp, CheckCircle2 } from 'lucide-react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
+import { Atom } from 'lucide-react'
 
-const PIPELINE_STEPS = [
-  { id: 1, label: 'Candidate routes', detail: 'Extract graph corridors' },
-  { id: 2, label: 'Traffic evaluation', detail: 'Apply segment speeds' },
-  { id: 3, label: 'Fitness calculation', detail: 'Evaluate objective function' },
-  { id: 4, label: 'Optimization', detail: 'Quantum delta-potential search' },
-  { id: 5, label: 'Best route', detail: 'Select global minimum' },
-]
+const PARTICLES = 22
 
+/**
+ * Illustrative only.
+ *
+ * Shows particles contracting toward a global best to convey what "swarm
+ * converging on an optimum" means. It is NOT running QPSO and the numbers are
+ * demo values — do not present this as computed output.
+ */
 export default function QPSOVisualization({ active = false, iterations = 48, bestFitness = 0.418 }) {
-  const [expanded, setExpanded] = useState(false)
+  const [t, setT] = useState(0)
+  const raf = useRef()
+
+  const seeds = useMemo(
+    () =>
+      Array.from({ length: PARTICLES }, (_, i) => ({
+        angle: (i / PARTICLES) * Math.PI * 2 + Math.random() * 0.6,
+        radius: 30 + Math.random() * 34,
+        speed: 0.5 + Math.random() * 0.9,
+        phase: Math.random() * Math.PI * 2,
+      })),
+    []
+  )
+
+  useEffect(() => {
+    if (!active) {
+      setT(0)
+      return
+    }
+    let start
+    const loop = (now) => {
+      if (!start) start = now
+      setT(((now - start) / 1000) % 4)
+      raf.current = requestAnimationFrame(loop)
+    }
+    raf.current = requestAnimationFrame(loop)
+    return () => cancelAnimationFrame(raf.current)
+  }, [active])
+
+  // 1 → fully dispersed, 0 → fully converged
+  const spread = active ? Math.max(0.12, 1 - (t % 4) / 4) : 1
+  const convergence = Math.round((1 - spread) * 100)
 
   return (
     <div className="card">
-      <div className="row-between" style={{ marginBottom: 12 }}>
-        <div className="card-title" style={{ margin: 0 }}>
-          <Cpu size={14} />
-          <span>QPSO Optimization</span>
-        </div>
-        <span className="badge badge-green" style={{ padding: '2px 8px', fontSize: 10 }}>
-          Technical Metaheuristic
-        </span>
+      <div className="card-title quantum">
+        <Atom size={13} />
+        QPSO Optimization
       </div>
 
-      {/* COMPACT PROCESS PIPELINE */}
-      <div style={{ marginBottom: 12 }}>
-        <div
-          style={{
-            fontSize: 10.5,
-            fontWeight: 600,
-            color: 'var(--text-dim)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.04em',
-            marginBottom: 8,
-          }}
-        >
-          Optimization Pipeline
-        </div>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(5, 1fr)',
-            gap: 5,
-            textAlign: 'center',
-          }}
-        >
-          {PIPELINE_STEPS.map((s) => (
-            <div
-              key={s.id}
+      <div className="qpso-canvas">
+        {seeds.map((s, i) => {
+          const wobble = Math.sin(t * s.speed * 2 + s.phase) * 6
+          const r = (s.radius + wobble) * spread
+          const x = 50 + (r * Math.cos(s.angle + t * 0.35 * s.speed)) / 2.4
+          const y = 50 + (r * Math.sin(s.angle + t * 0.35 * s.speed)) / 1.5
+          return (
+            <motion.span
+              key={i}
+              className="qpso-particle"
+              animate={{ opacity: active ? [0.45, 1, 0.45] : 0.35 }}
+              transition={{ duration: 1.6, repeat: Infinity, delay: i * 0.04 }}
               style={{
-                padding: '8px 4px',
-                borderRadius: 'var(--radius-sm)',
-                background: active ? 'var(--brand-light)' : 'var(--panel-hover)',
-                border: active && s.id === 4 ? '1px solid var(--brand)' : '1px solid var(--border)',
-                fontSize: 10,
-                transition: 'all 0.18s ease',
+                left: `${x}%`,
+                top: `${y}%`,
+                background: i % 5 === 0 ? 'var(--quantum)' : 'var(--cyan)',
+                boxShadow: `0 0 8px ${i % 5 === 0 ? 'var(--quantum)' : 'var(--cyan)'}`,
               }}
-            >
-              <div style={{ color: 'var(--brand)', fontWeight: 700, fontSize: 9.5 }}>Step {s.id}</div>
-              <div
-                style={{
-                  fontWeight: 600,
-                  color: 'var(--text)',
-                  fontSize: 10.5,
-                  marginTop: 3,
-                  lineHeight: 1.25,
-                }}
-              >
-                {s.label}
-              </div>
-            </div>
-          ))}
-        </div>
+            />
+          )
+        })}
+
+        <motion.span
+          className="qpso-target"
+          animate={{ scale: active ? [1, 1.35, 1] : 1 }}
+          transition={{ duration: 1.4, repeat: Infinity }}
+        />
       </div>
 
-      {/* EXECUTION METRICS */}
-      <div className="qpso-stats" style={{ marginBottom: 10 }}>
-        <div className="qpso-stat">
-          <b className="mono">12</b>
-          <span>Candidates</span>
-        </div>
+      <div className="qpso-stats">
         <div className="qpso-stat">
           <b className="mono">{iterations}</b>
           <span>Iterations</span>
         </div>
         <div className="qpso-stat">
           <b className="mono" style={{ color: 'var(--low)' }}>{bestFitness.toFixed(3)}</b>
-          <span>Fitness</span>
+          <span>Best fitness</span>
         </div>
         <div className="qpso-stat">
-          <b className="mono">16.2 ms</b>
-          <span>Runtime</span>
+          <b className="mono" style={{ color: 'var(--quantum)' }}>
+            {active ? convergence : 0}%
+          </b>
+          <span>Convergence</span>
         </div>
       </div>
 
-      {/* EXPLANATION SECTION */}
-      <button
-        className="btn btn-sm btn-block"
-        onClick={() => setExpanded((v) => !v)}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          background: 'var(--panel-hover)',
-          border: '1px solid var(--border)',
-          fontSize: 11.5,
-          color: 'var(--text-dim)',
-          marginTop: 8,
-        }}
-      >
-        <span>How QPSO selects this route</span>
-        {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-      </button>
-
-      <AnimatePresence>
-        {expanded && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            style={{ overflow: 'hidden' }}
-          >
-            <div
-              style={{
-                marginTop: 8,
-                padding: '10px 12px',
-                borderRadius: 'var(--radius-sm)',
-                background: 'var(--panel-hover)',
-                border: '1px solid var(--border)',
-                fontSize: 11.5,
-                lineHeight: 1.55,
-                color: 'var(--text-dim)',
-              }}
-            >
-              <p style={{ marginBottom: 6 }}>
-                <strong>Quantum Particle Swarm Optimization (QPSO)</strong> models route options through probabilistic wave-function states rather than classical Newtonian velocity vectors, overcoming premature convergence in dense urban road networks.
-              </p>
-              <p style={{ margin: 0 }}>
-                The algorithm minimizes a multi-objective cost function balancing travel time, real-time segment congestion, and network junction delays.
-              </p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <p style={{ fontSize: 10, color: 'var(--text-faint)', marginTop: 10, lineHeight: 1.45 }}>
+        Illustration of swarm convergence. Values shown are demo data, not a live
+        computation.
+      </p>
     </div>
   )
 }

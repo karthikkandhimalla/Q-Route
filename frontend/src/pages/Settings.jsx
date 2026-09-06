@@ -43,7 +43,7 @@ export default function Settings() {
             </div>
             <Toggle
               label="Dark mode"
-              hint="Toggle between warm light and dark theme."
+              hint="The interface is designed dark-first."
               on={theme === 'dark'}
               onChange={(v) => setTheme(v ? 'dark' : 'light')}
             />
