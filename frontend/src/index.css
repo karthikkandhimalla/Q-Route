@@ -274,6 +274,7 @@ input, select, textarea {
 .page {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 22px 28px 36px;
   background: transparent;
 }
@@ -774,12 +775,21 @@ input[type='range']::-moz-range-thumb {
 @media (max-width: 900px) {
   body { overflow: auto; }
   .grid-3, .grid-2 { grid-template-columns: 1fr; }
-  .page { padding: 18px 16px 90px; }
+  .page { padding: 18px 16px 104px; }
+  .card, .grid, .page > * { min-width: 0; max-width: 100%; }
 }
 
 @media (max-width: 560px) {
   .grid-4 { grid-template-columns: 1fr; }
+  .page { padding: 14px 10px 98px; }
+  .page-head { margin-bottom: 14px; }
   .page-head h1 { font-size: 20px; }
+  .card { padding: 14px; }
+}
+
+@media (max-width: 380px) {
+  .page { padding-inline: 8px; }
+  .card { padding: 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -168,6 +168,10 @@
   z-index: 10;
 }
 
+.mobile-drawer-close {
+  display: none;
+}
+
 .collapse-btn:hover {
   color: var(--brand);
   border-color: var(--brand);
@@ -533,6 +537,37 @@
     height: 460px;
     min-height: 460px;
   }
+}
+
+@media (max-width: 900px) {
+  .dash-grid {
+    min-width: 0;
+    gap: 14px;
+  }
+
+  .dash-col,
+  .dash-col:nth-child(2) { min-height: 0; }
+
+  .map-shell {
+    height: min(58vh, 430px) !important;
+    min-height: 320px !important;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .dash-grid { gap: 12px; }
+  .map-shell {
+    height: 360px !important;
+    min-height: 300px !important;
+    border-radius: var(--radius-sm);
+  }
+  .map-overlay { max-width: calc(100% - 12px); }
+  .map-legend { bottom: 8px; left: 8px; right: 8px; }
+}
+
+@media (max-width: 380px) {
+  .map-shell { height: 320px !important; min-height: 280px !important; }
 }
 
 /* ------------------------------------------------------------ map overlays */
@@ -1513,9 +1548,22 @@
   }
   .sidebar[data-open='true'] {
     transform: translateX(0);
+    width: min(260px, calc(100vw - 48px));
+    flex-basis: min(260px, calc(100vw - 48px));
   }
   .collapse-btn {
     display: none;
+  }
+
+  .mobile-drawer-close {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-dim);
   }
 
   .mobile-nav {
@@ -1524,11 +1572,11 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 60px;
+    height: 68px;
     background: #FFFFFF;
     border-top: 1px solid var(--border);
     z-index: 950;
-    padding: 6px 4px;
+    padding: 5px 4px max(5px, env(safe-area-inset-bottom));
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
   }
 
@@ -1537,16 +1585,34 @@
   }
 
   .mobile-nav a {
-    flex: 1;
+    flex: 1 1 0;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3px;
+    gap: 2px;
+    padding: 4px 2px;
     font-size: 10px;
+    line-height: 1.1;
     font-weight: 500;
     color: var(--text-dim);
     border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .mobile-nav a svg {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 auto;
+  }
+
+  .mobile-nav a span {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .mobile-nav a.active {
@@ -1554,6 +1620,79 @@
     background: var(--brand-light);
     font-weight: 600;
   }
+
+  .mobile-more {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 4px 2px;
+    border-radius: 8px;
+    color: var(--text-dim);
+    font-size: 10px;
+    line-height: 1.1;
+  }
+
+  .mobile-more svg {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 auto;
+  }
+
+  .mobile-more[aria-expanded='true'] {
+    color: var(--brand);
+    background: var(--brand-light);
+  }
+
+  .assistant-float { bottom: 76px; }
+}
+
+@media (max-width: 560px) {
+  .navbar {
+    height: 56px;
+    gap: 8px;
+    padding: 0 10px;
+  }
+
+  .navbar-left { gap: 7px; flex: 1 1 auto; min-width: 0; }
+  .brand-mark { width: 30px; height: 30px; }
+  .navbar-brand-text strong { font-size: 14px; }
+  .navbar-brand-text span,
+  .navbar-divider,
+  .navbar-page-title,
+  .live-chip { display: none; }
+  .navbar-right { flex: 0 0 auto; gap: 5px; }
+  .traffic-status-chip { padding: 7px; gap: 0; }
+  .traffic-status-chip span:last-child { display: none; }
+  .navbar-right .icon-btn,
+  .navbar-right .avatar { width: 32px; height: 32px; }
+  .mobile-nav { height: 64px; }
+  .mobile-nav a { font-size: 9px; }
+  .mobile-nav a svg { width: 16px; height: 16px; }
+  .mobile-more { font-size: 9px; }
+  .mobile-more svg { width: 16px; height: 16px; }
+  .assistant-float { right: 10px; bottom: 72px; }
+  .assistant-panel {
+    width: min(380px, calc(100vw - 20px));
+    max-height: calc(100vh - 148px);
+    overflow-y: auto;
+  }
+  .assistant-thread { max-height: min(210px, 28vh); }
+}
+
+@media (max-width: 380px) {
+  .navbar { padding-inline: 7px; }
+  .navbar-brand-text strong { font-size: 13px; }
+  .traffic-status-chip { display: none; }
+  .navbar-right { gap: 3px; }
+  .mobile-nav { padding-inline: 2px; }
+  .mobile-nav a { padding-inline: 1px; font-size: 8px; }
+  .mobile-nav a svg { width: 15px; height: 15px; }
+  .mobile-more { padding-inline: 1px; font-size: 8px; }
+  .mobile-more svg { width: 15px; height: 15px; }
 }
 
 /* --------------------------------------------------- alert trigger panel */
