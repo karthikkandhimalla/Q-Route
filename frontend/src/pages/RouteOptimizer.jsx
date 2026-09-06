@@ -103,6 +103,7 @@ export default function RouteOptimizer() {
               startPoint={startPoint}
               endPoint={endPoint}
               mapStyle={settings.mapStyle}
+              routeTransition={animating || optimizing}
             />
             <div className="map-overlay map-legend">
               <TrafficLegend />

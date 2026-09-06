@@ -277,7 +277,7 @@ const RouteCard = forwardRef(function RouteCard({ route, onCompareAlternatives }
               <div className="row-between">
                 <span>Average Corridor Speed:</span>
                 <strong style={{ color: 'var(--text)' }}>
-                  {(route.distanceKm / (route.etaMin / 60)).toFixed(0)} km/h
+                  {route.etaMin > 0 ? (route.distanceKm / (route.etaMin / 60)).toFixed(0) : '—'} km/h
                 </strong>
               </div>
               <div className="row-between">

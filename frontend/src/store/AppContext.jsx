@@ -198,8 +198,11 @@ export function AppProvider({ children }) {
     setPredictiveAlert(null)
     try {
       const res = await api.getRouteOptimization({ start, end, algorithm, mode })
+      if (!res || !Array.isArray(res.routes) || !res.routes.length || !res.recommended) {
+        throw new Error('The optimizer returned no usable route. Please try again.')
+      }
       setRoutes(res.routes)
-      setSelectedRouteId(res.recommended.id)
+      setSelectedRouteId(res.recommended.id || res.routes[0].id)
       setRoutesVersion((v) => v + 1)
       return res
     } catch (err) {

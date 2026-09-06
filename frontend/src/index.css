@@ -694,96 +694,42 @@ input[type='range']::-moz-range-thumb {
   100% { background-position: -200% 0; }
 }
 
-/* ------------------------------------------------------------- MapLibre map */
-.qroute-maplibre,
-.qroute-maplibre .maplibregl-map {
+/* ------------------------------------------------------------- leaflet map */
+.leaflet-container {
   background: #060a13;
   font-family: Inter, sans-serif;
   height: 100%;
   width: 100%;
   border-radius: var(--radius);
-  overflow: hidden;
 }
 
-.qroute-maplibre .maplibregl-canvas {
-  outline: none;
+:root:not([data-theme='light']) .leaflet-tile-pane {
   filter: invert(1) hue-rotate(190deg) brightness(0.92) contrast(0.92) saturate(0.7);
 }
 
-.qroute-maplibre .maplibregl-control-container {
-  font-family: Inter, sans-serif;
-}
-
-.qroute-maplibre .maplibregl-ctrl-group {
-  overflow: hidden;
-  border: 1px solid var(--border) !important;
-  border-radius: var(--radius-sm) !important;
-  box-shadow: var(--shadow) !important;
-}
-
-.qroute-maplibre .maplibregl-ctrl button {
-  width: 30px;
-  height: 30px;
-  background: var(--panel-solid) !important;
-  color: var(--text) !important;
-}
-
-.qroute-maplibre .maplibregl-ctrl button:hover {
-  background: var(--panel-hover) !important;
-}
-
-.qroute-maplibre .maplibregl-ctrl-attrib {
+.leaflet-control-attribution {
   background: rgba(6,10,19,.82) !important;
   color: var(--text-faint) !important;
   font-size: 9px !important;
   border-radius: 6px 0 0 0;
 }
 
-.qroute-maplibre .maplibregl-ctrl-attrib a { color: var(--text-dim) !important; }
+.leaflet-control-attribution a { color: var(--text-dim) !important; }
 
-.qroute-maplibre .maplibregl-popup-content {
-  background: var(--panel-solid);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-md);
-  font-size: 12px;
+.leaflet-bar {
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-sm) !important;
+  overflow: hidden;
+  box-shadow: var(--shadow) !important;
 }
 
-.qroute-maplibre .maplibregl-popup-tip { border-top-color: var(--panel-solid); }
-
-.qroute-maplibre .maplibregl-marker { z-index: 3; }
-
-.qroute-map-attribution,
-.qroute-map-error {
-  position: absolute;
-  z-index: 6;
-  pointer-events: none;
-  font-size: 9px;
+.leaflet-bar a {
+  background: var(--panel-solid) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
 }
 
-.qroute-map-attribution {
-  right: 6px;
-  bottom: 0;
-  padding: 2px 5px;
-  color: var(--text-faint);
-  background: rgba(6, 10, 19, 0.72);
-  border-radius: 4px 0 0 0;
-}
-
-.qroute-map-attribution a { color: var(--text-dim); pointer-events: auto; }
-
-.qroute-map-error {
-  inset: 16px;
-  display: grid;
-  place-items: center;
-  padding: 20px;
-  color: var(--text-dim);
-  text-align: center;
-  background: color-mix(in srgb, var(--panel) 88%, transparent);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-}
+.leaflet-bar a:hover { background: var(--panel-hover) !important; }
 
 /* animated subtle dash on recommended route */
 .route-flow {
@@ -818,31 +764,6 @@ input[type='range']::-moz-range-thumb {
   justify-content: center;
   background: rgba(16, 22, 41, 0.95);
   border: 2px solid var(--severe);
-  box-shadow: 0 0 14px rgba(251, 113, 133, 0.45);
-}
-
-.maplibre-marker-pin {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border: 2px solid #FFFFFF;
-  border-radius: 50%;
-  color: #FFFFFF;
-  font-size: 12px;
-  font-weight: 700;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-}
-
-.maplibre-incident-pin {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border: 2px solid var(--severe);
-  border-radius: 50%;
   box-shadow: 0 0 14px rgba(251, 113, 133, 0.45);
 }
 

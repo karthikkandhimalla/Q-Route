@@ -43,8 +43,11 @@ function toScore(fitness) {
 export function mapRoute(payload, index = 0, opts = {}) {
   const r = payload?.route ?? payload ?? {}
   const path = toPath(r.coordinates ?? r.path)
-  const etaMin = r.travel_time_minutes ?? r.etaMin ?? 0
-  const distanceKm = r.distance_km ?? r.distanceKm ?? 0
+  const rawEta = r.travel_time_minutes ?? r.etaMin ?? 0
+  const rawDist = r.distance_km ?? r.distanceKm ?? 0
+  const etaMin = Number.isFinite(rawEta) ? Number(rawEta.toFixed ? rawEta.toFixed(1) : rawEta) : 0
+  const distanceKm = Number.isFinite(rawDist) ? Number(rawDist.toFixed ? rawDist.toFixed(2) : rawDist) : 0
+  const congestion = Number.isFinite(payload?.congestion ?? r.congestion) ? (payload?.congestion ?? r.congestion) : 0
 
   return {
     id: payload?.request_id ? `${payload.request_id}-${index}` : `r${index + 1}`,
@@ -52,9 +55,9 @@ export function mapRoute(payload, index = 0, opts = {}) {
     algorithm: (payload?.algorithm ?? opts.algorithm ?? 'QPSO').toUpperCase(),
     recommended: opts.recommended ?? index === 0,
     fastest: opts.fastest ?? index === 0,
-    distanceKm: Number(distanceKm.toFixed ? distanceKm.toFixed(2) : distanceKm),
-    etaMin: Number(etaMin.toFixed ? etaMin.toFixed(1) : etaMin),
-    congestion: payload?.congestion ?? r.congestion ?? 0,
+    distanceKm,
+    etaMin,
+    congestion,
     score: toScore(payload?.fitness),
     timeSavedMin: opts.timeSavedMin ?? 0,
     via: opts.via ?? '',

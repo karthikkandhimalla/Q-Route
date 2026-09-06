@@ -141,6 +141,7 @@ export default function Dashboard() {
               endPoint={endPoint}
               highlightCoords={predictiveAlert?.coords}
               mapStyle={settings.mapStyle}
+              routeTransition={animating || optimizing}
             />
 
             <div className="map-overlay map-legend">
