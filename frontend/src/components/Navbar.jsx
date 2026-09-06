@@ -67,6 +67,7 @@ export default function Navbar() {
   const { alerts, dismissAlert, theme, setTheme, segments, user, signOut } = useApp()
   const [open, setOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const ref = useRef(null)
   const location = useLocation()
   const navigate = useNavigate()
@@ -87,8 +88,18 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', onClick)
   }, [])
 
+  useEffect(() => {
+    const page = document.querySelector('.page')
+    if (!page) return undefined
+
+    const onScroll = () => setScrolled(page.scrollTop > 8)
+    page.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => page.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
-    <header className="navbar">
+    <header className={`navbar${scrolled ? ' is-scrolled' : ''}`}>
       <div className="navbar-left">
         <BrandMark />
         <div className="navbar-brand-text">

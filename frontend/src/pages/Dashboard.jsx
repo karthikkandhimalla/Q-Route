@@ -10,7 +10,6 @@ import QPSOVisualization from '../components/QPSOVisualization'
 import TrafficAlert from '../components/TrafficAlert'
 import ReroutingPanel from '../components/ReroutingPanel'
 import TrafficLegend from '../components/TrafficLegend'
-import AssistantPanel from '../components/AssistantPanel'
 import { useApp } from '../store/AppContext'
 import { ALGORITHMS } from '../data/mockData'
 
@@ -259,7 +258,6 @@ export default function Dashboard() {
           )}
         </div>
       </div>
-      <AssistantPanel />
     </>
   )
 }

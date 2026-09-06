@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar'
 import LoadingScreen from './components/LoadingScreen'
+import AssistantPanel from './components/AssistantPanel'
 import { useApp } from './store/AppContext'
 import Login from './pages/Login'
 
@@ -54,6 +55,7 @@ export default function App() {
             </motion.div>
           </AnimatePresence>
         </Suspense>
+        <AssistantPanel />
       </div>
     </div>
   )
